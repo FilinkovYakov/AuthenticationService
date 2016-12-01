@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AuthenticationServiceAndClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Authentication_Service_and_Client
+namespace AuthenticationServiceAndClient
 {
     static class Program
     {
@@ -16,7 +17,11 @@ namespace Authentication_Service_and_Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Models.Role userRole = new Models.Role("admin");
+            IList<Models.Role> Roles = new List<Models.Role>();
+            Roles.Add(userRole);
+            Models.User user = new Models.User("alexey", "Alexey", Roles);
+            Application.Run(new AdminForm(user));
         }
     }
 }
