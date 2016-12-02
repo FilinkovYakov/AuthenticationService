@@ -10,7 +10,7 @@ namespace DAL
 {
     public class RoleRepository : IRoleRepository
     {
-        private DBContext db;
+        private readonly DBContext db;
 
         public RoleRepository(DBContext context)
         {
@@ -22,9 +22,9 @@ namespace DAL
             return db.Roles;
         }
 
-        public ODBModels.Role Get(ODBModels.Role role)
+        public ODBModels.Role GetById(int roleId)
         {
-            return db.Roles.Where(s => s.RoleName == role.RoleName).FirstOrDefault<ODBModels.Role>();
+            return db.Roles.Where(s => s.Id == roleId).FirstOrDefault<ODBModels.Role>();
         }
 
         public void Create(ODBModels.Role role)

@@ -63,6 +63,12 @@ namespace AuthenticationServiceAndClient.AuthenticationService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/AddRole", ReplyAction="http://tempuri.org/IAuthenticationService/AddRoleResponse")]
         System.Threading.Tasks.Task AddRoleAsync(string roleName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/GetAllRoles", ReplyAction="http://tempuri.org/IAuthenticationService/GetAllRolesResponse")]
+        Models.Role[] GetAllRoles();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/GetAllRoles", ReplyAction="http://tempuri.org/IAuthenticationService/GetAllRolesResponse")]
+        System.Threading.Tasks.Task<Models.Role[]> GetAllRolesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -154,6 +160,14 @@ namespace AuthenticationServiceAndClient.AuthenticationService {
         
         public System.Threading.Tasks.Task AddRoleAsync(string roleName) {
             return base.Channel.AddRoleAsync(roleName);
+        }
+        
+        public Models.Role[] GetAllRoles() {
+            return base.Channel.GetAllRoles();
+        }
+        
+        public System.Threading.Tasks.Task<Models.Role[]> GetAllRolesAsync() {
+            return base.Channel.GetAllRolesAsync();
         }
     }
 }

@@ -5,6 +5,8 @@ using IRepository;
 using Models;
 using Moq;
 using AuthenticationService;
+using DAL;
+using Microsoft.Practices.Unity;
 
 namespace UnitTests
 {
@@ -12,42 +14,129 @@ namespace UnitTests
     public class UnitTests
     {
         [Test]
-        public void TestMethod1()
+        public void CreateUserTest()
         {
-            AuthenticationService.AuthenticationService service = new AuthenticationService.AuthenticationService();
-
-            OperationResult result = service.CreateUser(new User
+            using (var lifeManager = new ScopedLifetimeManager())
             {
-                Login = "cc",
-                FullName = "abc",
-                Roles = new List<Role>()
+                Mock<IUserRepository> userRepositoryMock = new Mock<IUserRepository>();
+                userRepositoryMock.Setup(x => x.Create(It.IsAny<ODBModels.User>())).Verifiable();
+
+                DependencyContainer.Container.RegisterInstance<IUserRepository>(userRepositoryMock.Object, lifeManager);
+
+                AuthenticationService.AuthenticationService service = new AuthenticationService.AuthenticationService();
+                OperationResult result = service.CreateUser(new User
                 {
-                    new Role("admin")
+                    Login = "cc",
+                    FullName = "abc",
+                    Roles = new List<Role>()
+                {
+                    new Role("Admin")
                 }
-            }, "password");
+                }, "password");
 
-            Assert.IsNotNull(result);
-            Assert.IsFalse(result.Success);
-            Assert.IsTrue(result.Errors.Contains(OperationError.LoginErr));
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Success, Is.True);
+                Assert.That(result.Errors, Is.Empty);
 
-
+                userRepositoryMock.Verify(x => x.Create(It.IsAny<ODBModels.User>()), Times.Once);
+            }
         }
 
         [Test]
-        public void TestMethod2()
+        public void CreateUserInvalidLoginTest()
         {
-            Mock<IUserRepository> userRepositoryMock = new Mock<IUserRepository>();
-            userRepositoryMock.Setup(x => x.Create(It.IsAny<ODBModels.User>())).Verifiable();
-            userRepositoryMock.Verify(x => x.Create(It.IsAny<ODBModels.User>()), Times.Never);
+            using (var lifeManager = new ScopedLifetimeManager())
+            {
+                Mock<IUserRepository> userRepositoryMock = new Mock<IUserRepository>();
+                userRepositoryMock.Setup(x => x.Create(It.IsAny<ODBModels.User>())).Verifiable();
 
-            userRepositoryMock.Setup(x => x.Delete(It.IsAny<ODBModels.User>())).Verifiable();
-            userRepositoryMock.Verify(x => x.Delete(It.IsAny<ODBModels.User>()), Times.Never);
+                DependencyContainer.Container.RegisterInstance<IUserRepository>(userRepositoryMock.Object, lifeManager);
 
-            userRepositoryMock.Setup(x => x.Search("", "", "")).Verifiable();
-            userRepositoryMock.Verify(x => x.Search("", "", ""), Times.Never);
+                AuthenticationService.AuthenticationService service = new AuthenticationService.AuthenticationService();
+                OperationResult result = service.CreateUser(new User
+                {
+                    Login = "",
+                    FullName = "abc",
+                    Roles = new List<Role>()
+                {
+                    new Role("Admin")
+                }
+                }, "password");
 
-            userRepositoryMock.Setup(x => x.Update(It.IsAny<ODBModels.User>())).Verifiable();
-            userRepositoryMock.Verify(x => x.Update(It.IsAny<ODBModels.User>()), Times.Never);
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Success, Is.False);
+                Assert.That(result.Errors, Is.Not.Empty);
+                Assert.That(result.Errors.Contains(OperationError.LoginErr), Is.True);
+
+                userRepositoryMock.Verify(x => x.Create(It.IsAny<ODBModels.User>()), Times.Never);
+            }
+        }
+
+        [Test]
+        public void CreateUserInvalidFullNameTest()
+        {
+            using (var lifeManager = new ScopedLifetimeManager())
+            {
+                Mock<IUserRepository> userRepositoryMock = new Mock<IUserRepository>();
+                userRepositoryMock.Setup(x => x.Create(It.IsAny<ODBModels.User>())).Verifiable();
+
+                DependencyContainer.Container.RegisterInstance<IUserRepository>(userRepositoryMock.Object, lifeManager);
+
+                AuthenticationService.AuthenticationService service = new AuthenticationService.AuthenticationService();
+                OperationResult result = service.CreateUser(new User
+                {
+                    Login = "login",
+                    FullName = "",
+                    Roles = new List<Role>()
+                {
+                    new Role("Admin")
+                }
+                }, "password");
+
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Success, Is.False);
+                Assert.That(result.Errors, Is.Not.Empty);
+                Assert.That(result.Errors.Contains(OperationError.FullNameErr), Is.True);
+
+                userRepositoryMock.Verify(x => x.Create(It.IsAny<ODBModels.User>()), Times.Never);
+            }
+        }
+
+
+        [Test]
+        public void CreateUserInvalidExistUserTest()
+        {
+            using (var lifeManager = new ScopedLifetimeManager())
+            {
+                User user = new User
+                {
+                    Login = "login",
+                    FullName = "",
+                    Roles = new List<Role>()
+                    {
+                        new Role("Admin")
+                    }
+                };
+                Mock<IUserRepository> userRepositoryMock = new Mock<IUserRepository>();
+                userRepositoryMock
+                    .Setup(x => x.GetByLogin(user.Login))
+                    .Returns(new ODBModels.User())
+                    .Verifiable();
+                userRepositoryMock.Setup(x => x.Create(It.IsAny<ODBModels.User>())).Verifiable();
+
+                DependencyContainer.Container.RegisterInstance<IUserRepository>(userRepositoryMock.Object, lifeManager);
+
+                AuthenticationService.AuthenticationService service = new AuthenticationService.AuthenticationService();
+                OperationResult result = service.CreateUser(user, "password");
+
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Success, Is.False);
+                Assert.That(result.Errors, Is.Not.Empty);
+                Assert.That(result.Errors.Contains(OperationError.UserExistsErr), Is.True);
+
+                userRepositoryMock.Verify(x => x.GetByLogin(user.Login), Times.Once);
+                userRepositoryMock.Verify(x => x.Create(It.IsAny<ODBModels.User>()), Times.Never);
+            }
         }
     }
 }

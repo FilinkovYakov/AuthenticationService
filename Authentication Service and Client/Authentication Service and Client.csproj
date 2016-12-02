@@ -156,7 +156,9 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\AuthenticationService.OperationResult.datasource" />
     <None Include="Properties\DataSources\Models.OperationResult.datasource" />
+    <None Include="Properties\DataSources\Models.Role.datasource" />
     <None Include="Properties\DataSources\Models.User.datasource" />
+    <None Include="Properties\DataSources\ODBModels.Role.datasource" />
     <None Include="Properties\DataSources\ODBModels.User.datasource" />
     <None Include="Properties\DataSources\ServiceResult.ServiceResult.datasource" />
     <None Include="Properties\Settings.settings">

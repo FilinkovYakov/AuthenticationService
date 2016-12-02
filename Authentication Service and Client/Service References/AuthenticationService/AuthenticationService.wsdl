@@ -60,6 +60,12 @@
   <wsdl:message name="IAuthenticationService_AddRole_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddRoleResponse" />
   </wsdl:message>
+  <wsdl:message name="IAuthenticationService_GetAllRoles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRoles" />
+  </wsdl:message>
+  <wsdl:message name="IAuthenticationService_GetAllRoles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRolesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IAuthenticationService">
     <wsdl:operation name="CreateUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthenticationService/CreateUser" message="tns:IAuthenticationService_CreateUser_InputMessage" />
@@ -93,6 +99,10 @@
     <wsdl:operation name="AddRole">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthenticationService/AddRole" message="tns:IAuthenticationService_AddRole_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthenticationService/AddRoleResponse" message="tns:IAuthenticationService_AddRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthenticationService/GetAllRoles" message="tns:IAuthenticationService_GetAllRoles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthenticationService/GetAllRolesResponse" message="tns:IAuthenticationService_GetAllRoles_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IAuthenticationService" type="tns:IAuthenticationService">
@@ -165,6 +175,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddRole">
       <soap:operation soapAction="http://tempuri.org/IAuthenticationService/AddRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoles">
+      <soap:operation soapAction="http://tempuri.org/IAuthenticationService/GetAllRoles" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

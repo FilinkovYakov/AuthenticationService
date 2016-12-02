@@ -112,4 +112,16 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAllRoles">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllRolesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetAllRolesResult" nillable="true" type="q10:ArrayOfRole" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

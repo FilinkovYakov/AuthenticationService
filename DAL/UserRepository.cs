@@ -9,7 +9,7 @@ namespace DAL
 {
     public class UserRepository : IUserRepository
     {
-        private DBContext db;
+        private readonly DBContext db;
 
         public UserRepository(DBContext context)
         {
@@ -42,10 +42,15 @@ namespace DAL
             return users;
         }
 
-        public ODBModels.User Get(ODBModels.User user)
+        public ODBModels.User GetById(int userId)
         {
-            return db.Users.Where(s => s.Login == user.Login).FirstOrDefault<ODBModels.User>();
+            return db.Users.Where(s => s.Id == userId).FirstOrDefault<ODBModels.User>();
         }
+
+        public ODBModels.User GetByLogin(string login)
+        {
+            return db.Users.Where(s => s.Login == login).FirstOrDefault<ODBModels.User>();
+        }        
 
         public void Create(ODBModels.User user)
         {

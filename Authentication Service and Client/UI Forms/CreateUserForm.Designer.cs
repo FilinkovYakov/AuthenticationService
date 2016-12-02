@@ -144,10 +144,6 @@
             // 
             this.comboBoxRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRole.FormattingEnabled = true;
-            this.comboBoxRole.Items.AddRange(new object[] {
-            "Admin",
-            "Mentor",
-            "Intern"});
             this.comboBoxRole.Location = new System.Drawing.Point(157, 168);
             this.comboBoxRole.Name = "comboBoxRole";
             this.comboBoxRole.Size = new System.Drawing.Size(121, 21);
@@ -155,13 +151,13 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(203, 217);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 12;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // errorProviderPass
             // 
@@ -187,7 +183,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(330, 319);
+            this.CancelButton = this.buttonCancel;
+            this.ClientSize = new System.Drawing.Size(318, 267);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.comboBoxRole);
             this.Controls.Add(this.CreateUserButton);
@@ -200,6 +197,9 @@
             this.Controls.Add(this.Password);
             this.Controls.Add(this.FullName);
             this.Controls.Add(this.Login);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CreateUserForm";
             this.Text = "Create user form";
             ((System.ComponentModel.ISupportInitialize)(this.tableBindingSource)).EndInit();
