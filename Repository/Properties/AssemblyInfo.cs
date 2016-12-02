@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Repository")]
+[assembly: AssemblyTitle("IRepository")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("mirantis-it")]
-[assembly: AssemblyProduct("Repository")]
+[assembly: AssemblyProduct("IRepository")]
 [assembly: AssemblyCopyright("Copyright © mirantis-it 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("cc84792f-db2d-4e1d-b765-1453b10d2f07")]
+[assembly: Guid("c32a750f-309d-4593-8f1b-2112145d9761")]
 
 // Version information for an assembly consists of the following four values:
 //

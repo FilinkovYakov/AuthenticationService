@@ -209,11 +209,11 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Authentication Service WCF\Authentication Service WCF\Authentication_Service_WCF.csproj">
+    <ProjectReference Include="..\Authentication Service WCF\Authentication_Service_WCF.csproj">
       <Project>{D229FC0B-9E8A-459E-9535-2D78D0290C2F}</Project>
       <Name>Authentication_Service_WCF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Authentication Service WCF\Models\Models.csproj">
+    <ProjectReference Include="..\Models\Models.csproj">
       <Project>{65c5ac1c-a517-4cc9-866e-15a346ff5834}</Project>
       <Name>Models</Name>
     </ProjectReference>

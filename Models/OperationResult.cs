@@ -5,24 +5,23 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthenticationService
+namespace Models
 {
     [DataContract]
     public class OperationResult
     {
-        private List<OperationError> _errors = new List<OperationError>();
-
         public OperationResult()
         {
+            Errors = new List<OperationError>();
         }
         
         public bool Success { get { return !Errors.Any(); } }
 
         [DataMember]
-        public OperationError[] Errors { get { return _errors.ToArray(); } }
+        public IList<OperationError> Errors { get; set; }
 
         public void AddResultCode(OperationError errCode) {
-            _errors.Add(errCode);
+            Errors.Add(errCode);
         }
     }
 

@@ -4,23 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace IRepository
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T, TId> where T : class
     {
         IQueryable<T> GetAll();
 
-        T Get(T item);
+        T GetById(TId id);
         void Create(T item);
         void Update(T item);
         void Delete(T item);
     }
 
-    public interface IUserRepository : IRepository<ODBModels.User>
+    public interface IUserRepository : IRepository<ODBModels.User, int>
     {
+        ODBModels.User GetByLogin(String login);
         IEnumerable<ODBModels.User> Search(String login, String fullName, String role);
     }
 
-    public interface IRoleRepository : IRepository<ODBModels.Role>
+    public interface IRoleRepository : IRepository<ODBModels.Role, int>
     { }
 }

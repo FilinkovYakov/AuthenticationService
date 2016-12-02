@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AuthenticationService")]
+[assembly: AssemblyTitle("Models")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("mirantis-it")]
-[assembly: AssemblyProduct("AuthenticationService")]
+[assembly: AssemblyProduct("Models")]
 [assembly: AssemblyCopyright("Copyright © mirantis-it 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d5126daa-2b44-41f1-8196-c1b5ac3f5942")]
+[assembly: Guid("65c5ac1c-a517-4cc9-866e-15a346ff5834")]
 
 // Version information for an assembly consists of the following four values:
 //

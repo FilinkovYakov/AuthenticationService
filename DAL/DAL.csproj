@@ -60,7 +60,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Authentication Service WCF\Models\Models.csproj">
+    <ProjectReference Include="..\Models\Models.csproj">
       <Project>{65c5ac1c-a517-4cc9-866e-15a346ff5834}</Project>
       <Name>Models</Name>
     </ProjectReference>
