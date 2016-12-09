@@ -3,20 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication Service and Client", "Authentication Service and Client\Authentication Service and Client.csproj", "{0A3D7092-847B-471E-85D2-53A12E6D8A6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAuthenticationServices.Client", "Authentication Service and Client\InternshipAuthenticationServices.Client.csproj", "{0A3D7092-847B-471E-85D2-53A12E6D8A6A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D229FC0B-9E8A-459E-9535-2D78D0290C2F} = {D229FC0B-9E8A-459E-9535-2D78D0290C2F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication_Service_WCF", "Authentication Service WCF\Authentication_Service_WCF.csproj", "{D229FC0B-9E8A-459E-9535-2D78D0290C2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAuthenticationServices.AuthenticationService", "Authentication Service WCF\InternshipAuthenticationServices.AuthenticationService.csproj", "{D229FC0B-9E8A-459E-9535-2D78D0290C2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{65C5AC1C-A517-4CC9-866E-15A346FF5834}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAuthenticationServices.Models", "Models\InternshipAuthenticationServices.Models.csproj", "{65C5AC1C-A517-4CC9-866E-15A346FF5834}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{F7FC82D3-E294-45CB-8317-9BB7893FC665}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAuthenticationServices.DAL", "DAL\InternshipAuthenticationServices.DAL.csproj", "{F7FC82D3-E294-45CB-8317-9BB7893FC665}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{C32A750F-309D-4593-8F1B-2112145D9761}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAuthenticationServices.Repository", "Repository\InternshipAuthenticationServices.Repository.csproj", "{C32A750F-309D-4593-8F1B-2112145D9761}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{CC4312B7-F73F-43D4-A882-0F7B8D6E762A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAuthenticationServices.UnitTests", "UnitTests\InternshipAuthenticationServices.UnitTests.csproj", "{CC4312B7-F73F-43D4-A882-0F7B8D6E762A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

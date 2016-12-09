@@ -1,46 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using InternshipAuthenticationService.Models.EFModels;
 using System.Data.Entity;
-using IRepository;
+using InternshipAuthenticationService.Repository;
 
-namespace DAL
+namespace InternshipAuthenticationService.DAL
 {
     public class RoleRepository : IRoleRepository
     {
-        private readonly DBContext db;
+        private readonly AuthenticationServiceDbContext db;
 
-        public RoleRepository(DBContext context)
+        public RoleRepository(AuthenticationServiceDbContext context)
         {
             this.db = context;
         }
 
-        public IQueryable<ODBModels.Role> GetAll()
+        public IQueryable<Role> GetAll()
         {
             return db.Roles;
         }
 
-        public ODBModels.Role GetById(int roleId)
+        public Role GetById(int roleId)
         {
-            return db.Roles.Where(s => s.Id == roleId).FirstOrDefault<ODBModels.Role>();
+            return db.Roles.Where(s => s.Id == roleId).FirstOrDefault<Role>();
         }
 
-        public void Create(ODBModels.Role role)
+        public void Create(Role role)
         {
             db.Roles.Add(role);
             db.SaveChanges();
         }
 
-        public void Update(ODBModels.Role role)
+        public void Update(Role role)
         {
             db.Entry(role).State = EntityState.Modified;
         }
 
-        public void Delete(ODBModels.Role role)
+        public void Delete(Role role)
         {
-            ODBModels.Role newRole = db.Roles.Where(s => s.RoleName == role.RoleName).FirstOrDefault<ODBModels.Role>();
+            Role newRole = db.Roles.Where(s => s.RoleName == role.RoleName).FirstOrDefault<Role>();
             if (newRole != null)
                 db.Roles.Remove(newRole);
         }

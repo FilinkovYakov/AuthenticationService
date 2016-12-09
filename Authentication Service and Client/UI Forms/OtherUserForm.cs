@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using InternshipAuthenticationService.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,8 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InternshipAuthenticationService.Models.ServiceModels;
 
-namespace AuthenticationServiceAndClient
+namespace InternshipAuthenticationService.Client.UIForms
 {
     public partial class OtherUserForm : Form
     {
@@ -18,7 +19,7 @@ namespace AuthenticationServiceAndClient
         {
             InitializeComponent();
             this.user = user;
-            Text = "Welcome " + user.Login + ", you role is " + user.Roles.First<Models.Role>().RoleName;
+            Text = "Welcome " + user.Login + ", you role is " + user.Roles.First<Role>().RoleName;
         }
 
         private void button1_Click(object sender, EventArgs e)

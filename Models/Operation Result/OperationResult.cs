@@ -5,22 +5,22 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models
+namespace InternshipAuthenticationService.Models.OperationResult
 {
     [DataContract]
     public class OperationResult
     {
         public OperationResult()
         {
-            Errors = new List<OperationError>();
+            Errors = new List<OperationErrors>();
         }
         
         public bool Success { get { return !Errors.Any(); } }
 
         [DataMember]
-        public IList<OperationError> Errors { get; set; }
+        public IList<OperationErrors> Errors { get; set; }
 
-        public void AddResultCode(OperationError errCode) {
+        public void AddResultCode(OperationErrors errCode) {
             Errors.Add(errCode);
         }
     }
@@ -32,18 +32,5 @@ namespace Models
         public T Result { get; set; }
     }
 
-    [DataContract]
-    public enum OperationError
-    {
-        [EnumMember]
-        LoginErr,
-        [EnumMember]
-        FullNameErr,
-        [EnumMember]
-        RoleErr,
-        [EnumMember]
-        PassErr,
-        [EnumMember]
-        UserExistsErr
-    }
+    
 }

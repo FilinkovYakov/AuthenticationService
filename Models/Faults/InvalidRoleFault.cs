@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace Models.Faults
+namespace InternshipAuthenticationService.Models.Faults
 {
     [DataContract]
     public class InvalidRoleFault

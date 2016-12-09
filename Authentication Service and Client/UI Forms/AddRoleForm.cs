@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AuthenticationServiceAndClient.AuthenticationService;
+using InternshipAuthenticationService.Client.AuthenticationService;
 
-namespace AuthenticationServiceAndClient
+namespace InternshipAuthenticationService.Client.UIForms
 {
     public partial class AddRoleForm : Form
     {

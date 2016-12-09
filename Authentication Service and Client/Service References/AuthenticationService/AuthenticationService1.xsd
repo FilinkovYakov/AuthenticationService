@@ -1,47 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="User">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/InternshipAuthenticationService.Models.Faults" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/InternshipAuthenticationService.Models.Faults" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="InvalidRoleFault">
     <xs:sequence>
-      <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Roles" nillable="true" type="tns:ArrayOfRole" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="User" nillable="true" type="tns:User" />
-  <xs:complexType name="ArrayOfRole">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Role" nillable="true" type="tns:Role" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfRole" nillable="true" type="tns:ArrayOfRole" />
-  <xs:complexType name="Role">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="RoleName" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Role" nillable="true" type="tns:Role" />
-  <xs:complexType name="OperationResult">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Errors" nillable="true" type="tns:ArrayOfOperationError" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OperationResult" nillable="true" type="tns:OperationResult" />
-  <xs:complexType name="ArrayOfOperationError">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OperationError" type="tns:OperationError" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOperationError" nillable="true" type="tns:ArrayOfOperationError" />
-  <xs:simpleType name="OperationError">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="LoginErr" />
-      <xs:enumeration value="FullNameErr" />
-      <xs:enumeration value="RoleErr" />
-      <xs:enumeration value="PassErr" />
-      <xs:enumeration value="UserExistsErr" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="OperationError" nillable="true" type="tns:OperationError" />
+  <xs:element name="InvalidRoleFault" nillable="true" type="tns:InvalidRoleFault" />
 </xs:schema>

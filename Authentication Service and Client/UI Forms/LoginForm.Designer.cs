@@ -1,4 +1,4 @@
-﻿namespace AuthenticationServiceAndClient
+﻿namespace InternshipAuthenticationService.Client.UIForms
 {
     partial class LoginForm
     {

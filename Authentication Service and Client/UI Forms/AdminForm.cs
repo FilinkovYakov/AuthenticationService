@@ -1,38 +1,56 @@
-﻿using Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using InternshipAuthenticationService.Models.OperationResult;
 using System.Windows.Forms;
-using AuthenticationServiceAndClient.AuthenticationService;
+using InternshipAuthenticationService.Client.AuthenticationService;
+using InternshipAuthenticationService.Models.ServiceModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.ServiceModel;
 
-namespace AuthenticationServiceAndClient
+namespace InternshipAuthenticationService.Client.UIForms
 {
     public partial class AdminForm : Form
     {
+        List<ClientUser> clientUsers = new List<ClientUser>();
         User user;
         public AdminForm(User user)
         {
             InitializeComponent();
             this.user = user;
-            this.Text = "Welcome " + user.Login + ", you role is " + user.Roles.First<Models.Role>().RoleName;
+            this.Text = "Welcome " + user.Login + ", you role is " + user.Roles.First<Role>().RoleName;
+            dataGridViewSearch.AutoGenerateColumns = false;
+            LoadRoles();
         }
 
-        private void SearchButton_Click(object sender, EventArgs e)
+        private void LoadRoles()
         {
-            dataGridViewSearch.Rows.Add(textBoxLogin.Text, textBoxFullName.Text, comboBoxRole.Text);
-            //Authentication_Service_WCFClient client = new Authentication_Service_WCFClient();
-            //if (client.searchUser(textBoxLogin.Text, textBoxFullName.Text, comboBoxRole.Text) != null)
-            //{
-            //    foreach (User user in client.searchUser(textBoxLogin.Text, textBoxFullName.Text, comboBoxRole.Text))
-            //        dataGridViewSearch.Rows.Add(user.Login, user.FullName, user.Role.RoleName);
-            //}
-            //else
-            //    dataGridViewSearch.Rows.Add(null, null, null);
+            AuthenticationServiceClient client = new AuthenticationServiceClient();
+            Task<Role[]> rolesTask = client.GetAllRolesAsync();
+            rolesTask.ContinueWith(task =>
+            {
+                Invoke(new Action(() =>
+                {
+                    try
+                    {
+                        comboBoxRole.Items.Clear();
+                        foreach (string role in task.Result.Select(r => r.RoleName))
+                        {
+                            comboBoxRole.Items.Add(role);
+                        }
+                        comboBoxRole.Items.Add("All roles");
+                        Enabled = true;
+                    }
+                    catch (FaultException<Models.Faults.InvalidRoleFault> exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
+                    catch (FaultException exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
+                }));
+            });
         }
 
         private void CreateUserButtonClick(object sender, EventArgs e)
@@ -45,37 +63,49 @@ namespace AuthenticationServiceAndClient
         private void dataGridViewSearch_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            if (e.ColumnIndex == 3 && e.RowIndex < dataGridViewSearch.RowCount - 1)
+            if (e.ColumnIndex == 3 && e.RowIndex < dataGridViewSearch.RowCount)
             {
-                Role userRole = new Role(dataGridViewSearch.Rows[e.RowIndex].Cells[2].Value.ToString());
-                IList<Role> Roles = new List<Role>();
-                Roles.Add(userRole);
-                User user = new User(dataGridViewSearch.Rows[e.RowIndex].Cells[0].Value.ToString(), dataGridViewSearch.Rows[e.RowIndex].Cells[1].Value.ToString(), Roles);
+                ClientUser clientUser = (ClientUser)dataGridViewSearch.Rows[e.RowIndex].DataBoundItem;
+                User user = MapToServiceUser(clientUser);
                 EditUserForm form = new EditUserForm(user);
                 form.Owner = this;
                 form.ShowDialog();
             }
             else
-                if (e.ColumnIndex == 4 && e.RowIndex < dataGridViewSearch.RowCount - 1) {
-                DialogResult result = MessageBox.Show(
-        "Are you sure you want delete this user?",
-        "Confirm action",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Information,
-        MessageBoxDefaultButton.Button1,
-        MessageBoxOptions.DefaultDesktopOnly);
+                if (e.ColumnIndex == 4 && e.RowIndex < dataGridViewSearch.RowCount)
+            {
+                ClientUser clientUser = (ClientUser)dataGridViewSearch.Rows[e.RowIndex].DataBoundItem;
+                User user = MapToServiceUser(clientUser);
+                DialogResult dialogResult = MessageBox.Show(
+                    this,
+                    string.Format("Are you sure you want delete '{0}' user?", user.FullName),
+                    "Delete user",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
 
-                if (result == DialogResult.Yes) {
-                    Role userRole = new Role(dataGridViewSearch.Rows[e.RowIndex].Cells[2].Value.ToString());
-                    IList<Role> Roles = new List<Role>();
-                    Roles.Add(userRole);
-                    User user = new User(dataGridViewSearch.Rows[e.RowIndex].Cells[0].Value.ToString(), dataGridViewSearch.Rows[e.RowIndex].Cells[1].Value.ToString(), Roles);
+                if (dialogResult == DialogResult.Yes)
+                {
                     AuthenticationServiceClient client = new AuthenticationServiceClient();
-                    client.DeleteUser(user);
+                    OperationResult serviceResult = client.DeleteUser(user);
+                    if (!serviceResult.Success)
+                    {
+                        MessageBox.Show("Users not found!");
+                    }                   
                 }
 
-                
+
             }
+        }
+
+        private static User MapToServiceUser(ClientUser clientUser)
+        {
+            User user = new User();
+            user.Id = clientUser.Id;
+            user.Login = clientUser.Login;
+            user.FullName = clientUser.FullName;
+            user.Roles = new List<Role> { new Models.ServiceModels.Role(clientUser.Role) };
+            return user;
         }
 
         private void buttonAddRole_Click(object sender, EventArgs e)
@@ -89,6 +119,25 @@ namespace AuthenticationServiceAndClient
         {
             user = null;
             Close();
+        }
+
+        private void SearchUserButton_Click(object sender, EventArgs e)
+        {
+            AuthenticationServiceClient client = new AuthenticationServiceClient();
+            client.SearchUser(textBoxLogin.Text, textBoxFullName.Text, comboBoxRole.Text);
+            User[] users = client.SearchUser(textBoxLogin.Text, textBoxFullName.Text, comboBoxRole.Text);
+            clientUsers = new List<ClientUser>();
+            if (users.Count() == 0)
+            {
+                MessageBox.Show("Users not found!");
+            }
+            else {
+                foreach (User user in users) {
+                    clientUsers.Add(new ClientUser(user));
+                }
+            }
+            //bindingSource1.DataSource = clientUsers;
+            dataGridViewSearch.DataSource = clientUsers;
         }
     }
 }

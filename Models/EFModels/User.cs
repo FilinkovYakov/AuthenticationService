@@ -1,44 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Models;
 
-namespace ODBModels
+namespace InternshipAuthenticationService.Models.EFModels
 {
-
     public class User
     {
         public User() { }
 
+        [Key]
         public int Id { get; set; }
 
+        [MaxLength(256)]
         public String Login { get; set; }
 
         public String FullName { get; set; }
 
-        public virtual IList<Role> Roles { get; set; }
+        public virtual List<Role> Roles { get; set; }
 
         public String Password { get; set; }
 
         public String Salt { get; set; }
-    }
-    
-
-    public class Role
-    {
-        public Role() { }
-
-        public Role(string roleName)
-        {
-            RoleName = roleName;
-        }
-
-        public int Id { get; set; }
-
-        public String RoleName { get; set; }
-
-        public virtual IList<User> Users { get; set; }
     }
 }

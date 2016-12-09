@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using InternshipAuthenticationService.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,9 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AuthenticationServiceAndClient.AuthenticationService;
+using InternshipAuthenticationService.Client.AuthenticationService;
+using InternshipAuthenticationService.Models.ServiceModels;
+using InternshipAuthenticationService.Models.OperationResult;
+using System.ServiceModel;
 
-namespace AuthenticationServiceAndClient
+namespace InternshipAuthenticationService.Client.UIForms
 {
     public partial class EditUserForm : Form
     {
@@ -21,9 +24,39 @@ namespace AuthenticationServiceAndClient
             this.user = user;
             textBoxLogin.Text = user.Login;
             textBoxFullName.Text = user.FullName;
-            comboBoxRole.Text = user.Roles.First<Models.Role>().RoleName;
+            LoadRoles();
+            
         }
 
+        private void LoadRoles()
+        {
+            AuthenticationServiceClient client = new AuthenticationServiceClient();
+            Task<Role[]> rolesTask = client.GetAllRolesAsync();
+            rolesTask.ContinueWith(task =>
+            {
+                Invoke(new Action(() =>
+                {
+                    try
+                    {
+                        comboBoxRole.Items.Clear();
+                        foreach (string role in task.Result.Select(r => r.RoleName))
+                        {
+                            comboBoxRole.Items.Add(role);
+                        }
+                       Enabled = true;
+                        comboBoxRole.Text = user.Roles.First<Role>().RoleName;
+                    }
+                    catch (FaultException<Models.Faults.InvalidRoleFault> exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
+                    catch (FaultException exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
+                }));
+            });
+        }
         private void buttonChangePassword_Click(object sender, EventArgs e)
         {
             ChangePasswordForm changePasswordForm = new ChangePasswordForm(user);
@@ -33,13 +66,21 @@ namespace AuthenticationServiceAndClient
 
         private void buttonEditUser_Click(object sender, EventArgs e)
         {
+            user.Login = textBoxLogin.Text;
+            user.FullName = textBoxFullName.Text;
+            IList<Role> roles = new List<Role>();
+            roles.Add(new Role(comboBoxRole.Text));
+            user.Roles = roles;
             AuthenticationServiceClient client = new AuthenticationServiceClient();
-            Role userRole = new Role(comboBoxRole.Text);
-            IList<Role> Roles = new List<Role>();
-            Roles.Add(userRole);
-            User newUser = new User(textBoxLogin.Text, textBoxFullName.Text, Roles);
-            client.UpdateUser(user, newUser);
-            Close();
+            OperationResult serviceResult = client.UpdateUser(user);
+            if (!serviceResult.Success)
+            {
+                MessageBox.Show("Invalid data!");
+            }
+            else
+            {
+                Close();
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

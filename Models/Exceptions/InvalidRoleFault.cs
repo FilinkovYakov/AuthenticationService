@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Models.Exceptions
+namespace InternshipAuthenticationService.Models.Exceptions
 {
     public class InvalidRoleException : Exception
     {

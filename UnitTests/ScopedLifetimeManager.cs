@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Practices.Unity;
 
-namespace UnitTests
+namespace InternshipAuthenticationService.UnitTests
 {
     class ScopedLifetimeManager : LifetimeManager, IDisposable
     {

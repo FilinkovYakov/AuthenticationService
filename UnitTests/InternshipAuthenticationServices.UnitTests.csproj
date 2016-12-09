@@ -7,8 +7,8 @@
     <ProjectGuid>{CC4312B7-F73F-43D4-A882-0F7B8D6E762A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTests</RootNamespace>
-    <AssemblyName>UnitTests</AssemblyName>
+    <RootNamespace>InternshipAuthenticationService.UnitTests</RootNamespace>
+    <AssemblyName>InternshipAuthenticationService.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ScopedLifetimeManager.cs" />
-    <Compile Include="UnitTests.cs" />
+    <Compile Include="UnitTestsCrud.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,21 +80,21 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Authentication Service WCF\Authentication_Service_WCF.csproj">
+    <ProjectReference Include="..\Authentication Service WCF\InternshipAuthenticationServices.AuthenticationService.csproj">
       <Project>{D229FC0B-9E8A-459E-9535-2D78D0290C2F}</Project>
-      <Name>Authentication_Service_WCF</Name>
+      <Name>InternshipAuthenticationServices.AuthenticationService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
+    <ProjectReference Include="..\Models\InternshipAuthenticationServices.Models.csproj">
       <Project>{65c5ac1c-a517-4cc9-866e-15a346ff5834}</Project>
-      <Name>Models</Name>
+      <Name>InternshipAuthenticationServices.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
+    <ProjectReference Include="..\DAL\InternshipAuthenticationServices.DAL.csproj">
       <Project>{F7FC82D3-E294-45CB-8317-9BB7893FC665}</Project>
-      <Name>DAL</Name>
+      <Name>InternshipAuthenticationServices.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IRepository\IRepository.csproj">
+    <ProjectReference Include="..\Repository\InternshipAuthenticationServices.Repository.csproj">
       <Project>{c32a750f-309d-4593-8f1b-2112145d9761}</Project>
-      <Name>IRepository</Name>
+      <Name>InternshipAuthenticationServices.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

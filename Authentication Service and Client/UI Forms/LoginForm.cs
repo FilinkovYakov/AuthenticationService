@@ -9,10 +9,11 @@ using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AuthenticationServiceAndClient.AuthenticationService;
-using Models;
+using InternshipAuthenticationService.Client.AuthenticationService;
+using InternshipAuthenticationService.Models.OperationResult;
+using InternshipAuthenticationService.Models.ServiceModels;
 
-namespace AuthenticationServiceAndClient
+namespace InternshipAuthenticationService.Client.UIForms
 {
        public partial class LoginForm : Form
     {
@@ -26,17 +27,30 @@ namespace AuthenticationServiceAndClient
         {
 
             AuthenticationServiceClient client = new AuthenticationServiceClient();
-            User user = client.AuthorizationUser(textBoxLogin.Text, textBoxPassword.Text);
-            if (user.Roles.First<Models.Role>().RoleName.Equals("admin"))
+            OperationResult<User> result = client.AuthorizationUser(textBoxLogin.Text, textBoxPassword.Text);
+            if (result.Success)
             {
-                AdminForm adminForm = new AdminForm(user);
-                adminForm.Show();
+                Hide();
+                if (result.Result.Roles.First<Role>().RoleName.Equals("Admin"))
+                {
+                    AdminForm adminForm = new AdminForm(result.Result);
+                    adminForm.FormClosed += FormClosed;
+                    adminForm.Show();
+                }
+                else
+                {
+                    OtherUserForm otherUserForm = new OtherUserForm(result.Result);
+                    otherUserForm.FormClosed += FormClosed;
+                    otherUserForm.Show();
+                }
             }
             else
-            {
-                OtherUserForm otherUserForm = new OtherUserForm(user);
-                otherUserForm.Show();
-            }
+                MessageBox.Show("Invalid login or password!");
+        }
+
+        private void FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Close();
         }
     }
 }

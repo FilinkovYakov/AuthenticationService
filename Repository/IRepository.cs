@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using InternshipAuthenticationService.Models.EFModels;
 
-namespace IRepository
+namespace InternshipAuthenticationService.Repository
 {
     public interface IRepository<T, TId> where T : class
     {
@@ -16,12 +15,13 @@ namespace IRepository
         void Delete(T item);
     }
 
-    public interface IUserRepository : IRepository<ODBModels.User, int>
+    public interface IUserRepository : IRepository<User, int>
     {
-        ODBModels.User GetByLogin(String login);
-        IEnumerable<ODBModels.User> Search(String login, String fullName, String role);
+
+        User GetByLogin(String login);
+        IEnumerable<User> Search(String login, String fullName, String role);
     }
 
-    public interface IRoleRepository : IRepository<ODBModels.Role, int>
+    public interface IRoleRepository : IRepository<Role, int>
     { }
 }

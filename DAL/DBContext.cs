@@ -1,27 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using InternshipAuthenticationService.Models.EFModels;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity.Infrastructure.Annotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System;
+using System.Collections.Generic;
 
-namespace DAL
+namespace InternshipAuthenticationService.DAL
 {
-    public class DBContext : DbContext
+    public class AuthenticationServiceDbContext : DbContext
     {
-        public DBContext()
+        public AuthenticationServiceDbContext()
             : base("DbConnection")
-        { }
+        {
+            Database.SetInitializer(new AuthenticationServiceDbInitializer());
+        }
 
-        public DbSet<ODBModels.User> Users { get; set; }
-        public DbSet<ODBModels.Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ODBModels.User>().
-                HasMany(c => c.Roles).
-                WithMany(p => p.Users).
-                Map(
+            modelBuilder.Entity<Role>()
+                .Property(e => e.RoleName)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new[]
+                        {
+                            new IndexAttribute("Idx_RoleName") { IsUnique = true }
+                        }));
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.Login)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new[]
+                        {
+                            new IndexAttribute("Idx_Login") { IsUnique = true }
+                        }));
+
+            modelBuilder.Entity<User>()
+                .HasMany(c => c.Roles)
+                .WithMany(p => p.Users)
+                .Map(
                     m =>
                     {
                         m.MapLeftKey("UserId");
@@ -29,6 +49,34 @@ namespace DAL
                         m.ToTable("UsersRoles");
                     });
             base.OnModelCreating(modelBuilder);
+        }
+
+        private class AuthenticationServiceDbInitializer : IDatabaseInitializer<AuthenticationServiceDbContext>
+        {
+            public void InitializeDatabase(AuthenticationServiceDbContext context)
+            {
+                try
+                {
+                    Role adminRole = context.Roles.Add(new Role { RoleName = "Admin" });
+                    context.Roles.Add(new Role { RoleName = "Mentor" });
+                    context.Roles.Add(new Role { RoleName = "Intern" });
+
+                    context.Users.Add(new User
+                    {
+                        Login = "Admin",
+                        FullName = "Administrator",
+                        Salt = "SNbNJ3F/vAr89D0nSB9boe0K9VhmlQ276dTCabSR/yQ=",
+                        Password = "FM5FwhMbXrkwpQ6hBBCM8Q==",
+                        Roles = new List<Role> { adminRole }
+                    });
+
+                    context.SaveChanges();
+                }
+                catch
+                {
+                    // ignore error
+                }
+            }
         }
     }
 }

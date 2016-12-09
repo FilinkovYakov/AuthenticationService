@@ -4,11 +4,12 @@ using System.ServiceModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AuthenticationServiceAndClient.AuthenticationService;
-using Models;
-using Models.Faults;
+using InternshipAuthenticationService.Models.OperationResult;
+using InternshipAuthenticationService.Models.Faults;
+using InternshipAuthenticationService.Models.ServiceModels;
+using InternshipAuthenticationService.Client.AuthenticationService;
 
-namespace AuthenticationServiceAndClient
+namespace InternshipAuthenticationService.Client.UIForms
 {
     public partial class CreateUserForm : Form
     {
@@ -22,7 +23,7 @@ namespace AuthenticationServiceAndClient
         private void LoadRoles()
         {
             AuthenticationServiceClient client = new AuthenticationServiceClient();
-            Task<Models.Role[]> rolesTask = client.GetAllRolesAsync();
+            Task<Role[]> rolesTask = client.GetAllRolesAsync();
             rolesTask.ContinueWith(task =>
             {
                 Invoke(new Action(() =>
@@ -36,7 +37,7 @@ namespace AuthenticationServiceAndClient
                         }
                         Enabled = true;
                     }
-                    catch (FaultException<InvalidRoleFault> exc)
+                    catch (FaultException<Models.Faults.InvalidRoleFault> exc)
                     {
                         MessageBox.Show(exc.Message);
                     }
@@ -65,7 +66,7 @@ namespace AuthenticationServiceAndClient
             try
             {
                 AuthenticationServiceClient client = new AuthenticationServiceClient();
-                Models.OperationResult serviceResult = client.CreateUser(user, textBoxPassword.Text);
+                OperationResult serviceResult = client.CreateUser(user, textBoxPassword.Text);
                 if (CheckServiceResult(serviceResult))
                 {
                     Close();
@@ -96,23 +97,23 @@ namespace AuthenticationServiceAndClient
         {
             if (!serviceResult.Success)
             {
-                if (serviceResult.Errors.Contains(OperationError.LoginErr))
+                if (serviceResult.Errors.Contains(OperationErrors.LoginErr))
                 {
                     errorProviderLogin.SetError(textBoxLogin, "Login is not valid!");
                 }
-                if (serviceResult.Errors.Contains(OperationError.FullNameErr))
+                if (serviceResult.Errors.Contains(OperationErrors.FullNameErr))
                 {
                     errorProviderFullName.SetError(textBoxFullName, "Full name is not valid!");
                 }
-                if (serviceResult.Errors.Contains(OperationError.RoleErr))
+                if (serviceResult.Errors.Contains(OperationErrors.RoleErr))
                 {
                     errorProviderRole.SetError(comboBoxRole, "Role is not valid!");
                 }
-                if (serviceResult.Errors.Contains(OperationError.PassErr))
+                if (serviceResult.Errors.Contains(OperationErrors.PassErr))
                 {
                     errorProviderPass.SetError(textBoxPassword, "Password is not valid!");
                 }
-                if (serviceResult.Errors.Contains(OperationError.UserExistsErr))
+                if (serviceResult.Errors.Contains(OperationErrors.UserExistErr))
                 {
                     errorProviderLogin.SetError(textBoxLogin, "User with this login exists!");
                 }

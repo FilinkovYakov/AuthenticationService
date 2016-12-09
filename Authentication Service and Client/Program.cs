@@ -1,11 +1,13 @@
-﻿using AuthenticationServiceAndClient;
+﻿using InternshipAuthenticationService.Client.UIForms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InternshipAuthenticationService.Client.AuthenticationService;
+using InternshipAuthenticationService.Models.ServiceModels;
 
-namespace AuthenticationServiceAndClient
+namespace InternshipAuthenticationService.Client
 {
     static class Program
     {
@@ -17,11 +19,7 @@ namespace AuthenticationServiceAndClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Models.Role userRole = new Models.Role("admin");
-            IList<Models.Role> Roles = new List<Models.Role>();
-            Roles.Add(userRole);
-            Models.User user = new Models.User("alexey", "Alexey", Roles);
-            Application.Run(new AdminForm(user));
+            Application.Run(new LoginForm());
         }
     }
 }
