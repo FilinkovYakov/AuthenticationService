@@ -74,6 +74,15 @@ namespace InternshipAuthenticationService.DAL
             _db.SaveChanges();
         }
 
+        public void ChangePassword(User user)
+        {
+            User newUser = new User();
+            newUser = GetById(user.Id);
+            newUser.Password = user.Password;
+            newUser.Salt = user.Salt;
+            _db.SaveChanges();
+        }
+
         public void Delete(User user)
         {
             User newUser = _db.Users.Where(s => s.Login == user.Login).FirstOrDefault<User>();

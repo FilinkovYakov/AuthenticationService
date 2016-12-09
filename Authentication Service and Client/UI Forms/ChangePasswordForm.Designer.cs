@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelNewPassword = new System.Windows.Forms.Label();
             this.labelConfirmPassword = new System.Windows.Forms.Label();
             this.buttonChangePassword = new System.Windows.Forms.Button();
             this.textBoxNewPassword = new System.Windows.Forms.TextBox();
             this.textBoxConfirmPassword = new System.Windows.Forms.TextBox();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.errorProviderNewPassword = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderConfirmNewPassword = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderNewPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderConfirmNewPassword)).BeginInit();
             this.SuspendLayout();
             // 
             // labelNewPassword
@@ -90,11 +95,19 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // errorProviderNewPassword
+            // 
+            this.errorProviderNewPassword.ContainerControl = this;
+            // 
+            // errorProviderConfirmNewPassword
+            // 
+            this.errorProviderConfirmNewPassword.ContainerControl = this;
+            // 
             // ChangePasswordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 162);
+            this.ClientSize = new System.Drawing.Size(311, 162);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxConfirmPassword);
             this.Controls.Add(this.textBoxNewPassword);
@@ -103,6 +116,8 @@
             this.Controls.Add(this.labelNewPassword);
             this.Name = "ChangePasswordForm";
             this.Text = "Change Password Form";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderNewPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderConfirmNewPassword)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,5 +130,7 @@
         private System.Windows.Forms.TextBox textBoxNewPassword;
         private System.Windows.Forms.TextBox textBoxConfirmPassword;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.ErrorProvider errorProviderNewPassword;
+        private System.Windows.Forms.ErrorProvider errorProviderConfirmNewPassword;
     }
 }

@@ -124,8 +124,12 @@ namespace InternshipAuthenticationService.Client.UIForms
         private void SearchUserButton_Click(object sender, EventArgs e)
         {
             AuthenticationServiceClient client = new AuthenticationServiceClient();
-            client.SearchUser(textBoxLogin.Text, textBoxFullName.Text, comboBoxRole.Text);
-            User[] users = client.SearchUser(textBoxLogin.Text, textBoxFullName.Text, comboBoxRole.Text);
+            string roleName = comboBoxRole.Text;
+            if (roleName.ToLower().Equals("all roles"))
+            {
+                roleName = "";
+            }
+            User[] users = client.SearchUser(textBoxLogin.Text, textBoxFullName.Text, roleName);
             clientUsers = new List<ClientUser>();
             if (users.Count() == 0)
             {
@@ -136,7 +140,6 @@ namespace InternshipAuthenticationService.Client.UIForms
                     clientUsers.Add(new ClientUser(user));
                 }
             }
-            //bindingSource1.DataSource = clientUsers;
             dataGridViewSearch.DataSource = clientUsers;
         }
     }

@@ -24,14 +24,35 @@ namespace InternshipAuthenticationService.Client.UIForms
 
         private void buttonChangePassword_Click(object sender, EventArgs e)
         {
+            ClearErrorProvidres();
+            if (!ValidateUserData())
+                return;
             AuthenticationServiceClient client = new AuthenticationServiceClient();
             OperationResult serviceResult = client.ChangePassword(user, textBoxNewPassword.Text);
             if (serviceResult.Success)
                 Close();
-            else
-                MessageBox.Show("Invalid password!");
+            if (serviceResult.Errors.Contains(OperationErrors.PassErr))
+            {
+                errorProviderNewPassword.SetError(textBoxNewPassword, "Password is not valid!");
+            }
         }
 
+        private bool ValidateUserData()
+        {
+            bool result = true;
+            if (!textBoxNewPassword.Text.Equals(textBoxConfirmPassword.Text))
+            {
+                errorProviderConfirmNewPassword.SetError(textBoxConfirmPassword, "Password and confirm password don't match!");
+                result = false;
+            }
+            return result;
+        }
+
+        private void ClearErrorProvidres()
+        {
+            errorProviderNewPassword.Clear();
+            errorProviderConfirmNewPassword.Clear();
+        }
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();

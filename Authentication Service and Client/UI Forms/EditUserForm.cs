@@ -66,21 +66,50 @@ namespace InternshipAuthenticationService.Client.UIForms
 
         private void buttonEditUser_Click(object sender, EventArgs e)
         {
+            ClearErrorProvidres();
+            BuildUser();
+            AuthenticationServiceClient client = new AuthenticationServiceClient();
+            OperationResult serviceResult = client.UpdateUser(user);
+            if (CheckServiceResult(serviceResult))
+            {
+                Close();
+            }
+        }
+
+        private bool CheckServiceResult(OperationResult serviceResult)
+        {
+            if (!serviceResult.Success)
+            {
+                if (serviceResult.Errors.Contains(OperationErrors.LoginErr))
+                {
+                    errorProviderLogin.SetError(textBoxLogin, "Login is not valid!");
+                }
+                if (serviceResult.Errors.Contains(OperationErrors.FullNameErr))
+                {
+                    errorProviderFullName.SetError(textBoxFullName, "Full name is not valid!");
+                }
+                if (serviceResult.Errors.Contains(OperationErrors.RoleErr))
+                {
+                    errorProviderRole.SetError(comboBoxRole, "Role is not valid!");
+                }
+            }
+            return serviceResult.Success;
+        }
+
+        private void BuildUser()
+        {
             user.Login = textBoxLogin.Text;
             user.FullName = textBoxFullName.Text;
             IList<Role> roles = new List<Role>();
             roles.Add(new Role(comboBoxRole.Text));
             user.Roles = roles;
-            AuthenticationServiceClient client = new AuthenticationServiceClient();
-            OperationResult serviceResult = client.UpdateUser(user);
-            if (!serviceResult.Success)
-            {
-                MessageBox.Show("Invalid data!");
-            }
-            else
-            {
-                Close();
-            }
+        }
+
+        private void ClearErrorProvidres()
+        {
+            errorProviderLogin.Clear();
+            errorProviderFullName.Clear();
+            errorProviderRole.Clear();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

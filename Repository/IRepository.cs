@@ -20,6 +20,7 @@ namespace InternshipAuthenticationService.Repository
 
         User GetByLogin(String login);
         IEnumerable<User> Search(String login, String fullName, String role);
+        void ChangePassword(User newUser);
     }
 
     public interface IRoleRepository : IRepository<Role, int>

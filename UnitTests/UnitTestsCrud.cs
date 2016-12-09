@@ -418,7 +418,7 @@ namespace InternshipAuthenticationService.UnitTests
         public void ChangeUserPasswordTest()
         {
             Mock<IUserRepository> userRepositoryMock = new Mock<IUserRepository>();
-            userRepositoryMock.Setup(x => x.Update(It.IsAny<Models.EFModels.User>())).Verifiable();
+            userRepositoryMock.Setup(x => x.ChangePassword(It.IsAny<Models.EFModels.User>())).Verifiable();
             userRepositoryMock.Setup(x => x.GetById(It.IsAny<int>())).Returns(new Models.EFModels.User()).Verifiable();
             AuthenticationService.AuthenticationService service = new AuthenticationService.AuthenticationService(userRepositoryMock.Object, Mock.Of<IRoleRepository>());
             OperationResult result = service.ChangePassword(new Models.ServiceModels.User
@@ -434,15 +434,15 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Success, Is.True);
             Assert.That(result.Errors.Count() == 0, Is.True);
-            userRepositoryMock.Verify(x => x.Update(It.IsAny<Models.EFModels.User>()), Times.Once);
-            //userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
+            userRepositoryMock.Verify(x => x.ChangePassword(It.IsAny<Models.EFModels.User>()), Times.Once);
+            userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
 
         [Test]
         public void ChangeUserPasswordInvalidUserTest()
         {
             Mock<IUserRepository> userRepositoryMock = new Mock<IUserRepository>();
-            userRepositoryMock.Setup(x => x.Update(It.IsAny<Models.EFModels.User>())).Verifiable();
+            userRepositoryMock.Setup(x => x.ChangePassword(It.IsAny<Models.EFModels.User>())).Verifiable();
             userRepositoryMock.Setup(x => x.GetById(It.IsAny<int>())).Verifiable();
             AuthenticationService.AuthenticationService service = new AuthenticationService.AuthenticationService(userRepositoryMock.Object, Mock.Of<IRoleRepository>());
             OperationResult result = service.ChangePassword(null, null);
@@ -452,7 +452,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Errors.Contains(OperationErrors.NullErr), Is.True);
             Assert.That(result.Errors.Contains(OperationErrors.PassErr), Is.True);
             Assert.That(result.Errors.Count() == 2, Is.True);
-            userRepositoryMock.Verify(x => x.Update(It.IsAny<Models.EFModels.User>()), Times.Never);
+            userRepositoryMock.Verify(x => x.ChangePassword(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Never);
         }
 
@@ -460,7 +460,7 @@ namespace InternshipAuthenticationService.UnitTests
         public void ChangeUserPasswordUserNotExistTest()
         {
             Mock<IUserRepository> userRepositoryMock = new Mock<IUserRepository>();
-            userRepositoryMock.Setup(x => x.Update(It.IsAny<Models.EFModels.User>())).Verifiable();
+            userRepositoryMock.Setup(x => x.ChangePassword(It.IsAny<Models.EFModels.User>())).Verifiable();
             userRepositoryMock.Setup(x => x.GetById(It.IsAny<int>())).Verifiable();
             AuthenticationService.AuthenticationService service = new AuthenticationService.AuthenticationService(userRepositoryMock.Object, Mock.Of<IRoleRepository>());
             OperationResult result = service.ChangePassword(new Models.ServiceModels.User
@@ -477,7 +477,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors.Contains(OperationErrors.UserNotExistErr), Is.True);
             Assert.That(result.Errors.Count() == 1, Is.True);
-            userRepositoryMock.Verify(x => x.Update(It.IsAny<Models.EFModels.User>()), Times.Never);
+            userRepositoryMock.Verify(x => x.ChangePassword(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonEditUser = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelLogin = new System.Windows.Forms.Label();
@@ -37,6 +38,12 @@
             this.textBoxFullName = new System.Windows.Forms.TextBox();
             this.buttonChangePassword = new System.Windows.Forms.Button();
             this.comboBoxRole = new System.Windows.Forms.ComboBox();
+            this.errorProviderLogin = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderFullName = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderRole = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderLogin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderFullName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderRole)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonEditUser
@@ -123,6 +130,18 @@
             this.comboBoxRole.Size = new System.Drawing.Size(100, 21);
             this.comboBoxRole.TabIndex = 9;
             // 
+            // errorProviderLogin
+            // 
+            this.errorProviderLogin.ContainerControl = this;
+            // 
+            // errorProviderFullName
+            // 
+            this.errorProviderFullName.ContainerControl = this;
+            // 
+            // errorProviderRole
+            // 
+            this.errorProviderRole.ContainerControl = this;
+            // 
             // EditUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,6 +158,9 @@
             this.Controls.Add(this.buttonEditUser);
             this.Name = "EditUserForm";
             this.Text = "Edit User Form";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderLogin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderFullName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderRole)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,5 +177,8 @@
         private System.Windows.Forms.TextBox textBoxLogin;
         private System.Windows.Forms.TextBox textBoxFullName;
         private System.Windows.Forms.Button buttonChangePassword;
+        private System.Windows.Forms.ErrorProvider errorProviderLogin;
+        private System.Windows.Forms.ErrorProvider errorProviderFullName;
+        private System.Windows.Forms.ErrorProvider errorProviderRole;
     }
 }
