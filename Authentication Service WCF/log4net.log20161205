@@ -1,0 +1,42 @@
+2016-12-05 10:39:52,485 [37] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - The Include path expression must refer to a navigation property defined on the type. Use dotted paths for reference navigation properties and the Select operator for collection navigation properties.
+Parameter name: path
+
+2016-12-05 10:41:35,599 [37] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - The Include path expression must refer to a navigation property defined on the type. Use dotted paths for reference navigation properties and the Select operator for collection navigation properties.
+Parameter name: path
+
+2016-12-05 13:15:39,550 [70] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - Error mapping types.
+
+Mapping types:
+User -> User
+InternshipAuthenticationService.Models.ServiceModels.User -> InternshipAuthenticationService.Models.EFModels.User
+
+Type Map configuration:
+User -> User
+InternshipAuthenticationService.Models.ServiceModels.User -> InternshipAuthenticationService.Models.EFModels.User
+
+Property:
+Roles
+
+2016-12-05 13:18:02,909 [84] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - Error mapping types.
+
+Mapping types:
+User -> User
+InternshipAuthenticationService.Models.ServiceModels.User -> InternshipAuthenticationService.Models.EFModels.User
+
+Type Map configuration:
+User -> User
+InternshipAuthenticationService.Models.ServiceModels.User -> InternshipAuthenticationService.Models.EFModels.User
+
+Property:
+Roles
+
+2016-12-05 13:20:29,175 [84] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=472540 for information on understanding and handling optimistic concurrency exceptions.
+
+2016-12-05 13:25:27,137 [95] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=472540 for information on understanding and handling optimistic concurrency exceptions.
+
+2016-12-05 13:37:29,738 [95] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - Attaching an entity of type 'InternshipAuthenticationService.Models.EFModels.Role' failed because another entity of the same type already has the same primary key value. This can happen when using the 'Attach' method or setting the state of an entity to 'Unchanged' or 'Modified' if any entities in the graph have conflicting key values. This may be because some entities are new and have not yet received database-generated key values. In this case use the 'Add' method or the 'Added' entity state to track the graph and then set the state of non-new entities to 'Unchanged' or 'Modified' as appropriate.
+
+2016-12-05 13:41:20,289 [95] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - Attaching an entity of type 'InternshipAuthenticationService.Models.EFModels.Role' failed because another entity of the same type already has the same primary key value. This can happen when using the 'Attach' method or setting the state of an entity to 'Unchanged' or 'Modified' if any entities in the graph have conflicting key values. This may be because some entities are new and have not yet received database-generated key values. In this case use the 'Add' method or the 'Added' entity state to track the graph and then set the state of non-new entities to 'Unchanged' or 'Modified' as appropriate.
+
+2016-12-05 14:48:59,855 [24] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - Attaching an entity of type 'InternshipAuthenticationService.Models.EFModels.User' failed because another entity of the same type already has the same primary key value. This can happen when using the 'Attach' method or setting the state of an entity to 'Unchanged' or 'Modified' if any entities in the graph have conflicting key values. This may be because some entities are new and have not yet received database-generated key values. In this case use the 'Add' method or the 'Added' entity state to track the graph and then set the state of non-new entities to 'Unchanged' or 'Modified' as appropriate.
+

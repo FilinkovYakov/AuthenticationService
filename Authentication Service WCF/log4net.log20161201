@@ -1,0 +1,4 @@
+2016-12-01 14:03:01,679 [66] ERROR AuthenticationService.AuthenticationService        HandleError          - This is role not exists
+
+2016-12-01 14:06:39,060 [12] ERROR AuthenticationService.AuthenticationService        HandleError          - This is role not exists
+

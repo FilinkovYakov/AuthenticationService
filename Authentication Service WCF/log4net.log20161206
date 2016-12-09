@@ -1,0 +1,8 @@
+2016-12-06 11:37:51,106 [21] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - This is role not exists
+
+2016-12-06 12:47:48,062 [25] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - An exception occurred while initializing the database. See the InnerException for details.
+
+2016-12-06 15:16:09,457 [140] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - Object reference not set to an instance of an object.
+
+2016-12-06 15:17:06,031 [140] ERROR InternshipAuthenticationService.AuthenticationService.AuthenticationService HandleError          - Object reference not set to an instance of an object.
+
