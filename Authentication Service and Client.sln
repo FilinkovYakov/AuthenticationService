@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAuthenticationSer
 		{D229FC0B-9E8A-459E-9535-2D78D0290C2F} = {D229FC0B-9E8A-459E-9535-2D78D0290C2F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAuthenticationServices.AuthenticationService", "Authentication Service WCF\InternshipAuthenticationServices.AuthenticationService.csproj", "{D229FC0B-9E8A-459E-9535-2D78D0290C2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAuthenticationService.AuthenticationService", "Authentication Service WCF\InternshipAuthenticationService.AuthenticationService.csproj", "{D229FC0B-9E8A-459E-9535-2D78D0290C2F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAuthenticationServices.Models", "Models\InternshipAuthenticationServices.Models.csproj", "{65C5AC1C-A517-4CC9-866E-15A346FF5834}"
 EndProject

@@ -114,6 +114,7 @@
             this.Controls.Add(this.buttonChangePassword);
             this.Controls.Add(this.labelConfirmPassword);
             this.Controls.Add(this.labelNewPassword);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ChangePasswordForm";
             this.Text = "Change Password Form";
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderNewPassword)).EndInit();

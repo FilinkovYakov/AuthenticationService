@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -48,20 +48,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="InternshipAuthenticationService.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -154,7 +146,9 @@
     <EmbeddedResource Include="UI Forms\OtherUserForm.resx">
       <DependentUpon>OtherUserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\AuthenticationService.OperationResult.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.EFModels.User.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.EFModels.User1.datasource" />
@@ -173,6 +167,7 @@
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.OperationResult.OperationResult5.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.OperationResult.OperationResult6.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.OperationResult.OperationResult7.datasource" />
+    <None Include="Properties\DataSources\InternshipAuthenticationService.Models.OperationResult.OperationResult8.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.Role.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.Role.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.Role1.datasource" />
@@ -182,6 +177,7 @@
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.Role5.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.Role6.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.Role7.datasource" />
+    <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.Role8.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.User.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.User1.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.User2.datasource" />
@@ -190,6 +186,7 @@
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.User5.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.User6.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.User7.datasource" />
+    <None Include="Properties\DataSources\InternshipAuthenticationService.Models.ServiceModels.User8.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.Models.User.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationService.ODBModels.User.datasource" />
     <None Include="Properties\DataSources\InternshipAuthenticationServices.Models.OperationResult.datasource" />
@@ -212,6 +209,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Service References\AuthenticationService\AuthenticationService.wsdl" />
+    <None Include="Service References\AuthenticationService\AuthenticationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\AuthenticationService\AuthenticationService1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -224,12 +224,11 @@
     <None Include="Service References\AuthenticationService\AuthenticationService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\AuthenticationService\AuthenticationService5.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -250,6 +249,16 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Authentication Service WCF\InternshipAuthenticationService.AuthenticationService.csproj">
+      <Project>{D229FC0B-9E8A-459E-9535-2D78D0290C2F}</Project>
+      <Name>InternshipAuthenticationService.AuthenticationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\InternshipAuthenticationServices.Models.csproj">
+      <Project>{65c5ac1c-a517-4cc9-866e-15a346ff5834}</Project>
+      <Name>InternshipAuthenticationServices.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Service References\AuthenticationService\" />
   </ItemGroup>
   <ItemGroup>
@@ -266,16 +275,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Authentication Service WCF\InternshipAuthenticationServices.AuthenticationService.csproj">
-      <Project>{D229FC0B-9E8A-459E-9535-2D78D0290C2F}</Project>
-      <Name>InternshipAuthenticationServices.AuthenticationService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Models\InternshipAuthenticationServices.Models.csproj">
-      <Project>{65c5ac1c-a517-4cc9-866e-15a346ff5834}</Project>
-      <Name>InternshipAuthenticationServices.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

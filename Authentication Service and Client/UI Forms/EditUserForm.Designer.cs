@@ -156,6 +156,7 @@
             this.Controls.Add(this.labelLogin);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonEditUser);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EditUserForm";
             this.Text = "Edit User Form";
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderLogin)).EndInit();

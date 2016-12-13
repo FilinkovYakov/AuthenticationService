@@ -12,20 +12,28 @@ using InternshipAuthenticationService.Client.AuthenticationService;
 using InternshipAuthenticationService.Models.ServiceModels;
 using InternshipAuthenticationService.Models.OperationResult;
 using System.ServiceModel;
+using System.Web.UI.WebControls;
 
 namespace InternshipAuthenticationService.Client.UIForms
 {
     public partial class EditUserForm : Form
     {
         private User user;
-        public EditUserForm(User user)
+        private User _yourUser;
+        public EditUserForm(User user, User yourUser)
         {
             InitializeComponent();
             this.user = user;
+            _yourUser = yourUser;
             textBoxLogin.Text = user.Login;
             textBoxFullName.Text = user.FullName;
             LoadRoles();
-            
+            if (user.Id == _yourUser.Id)
+            {
+                comboBoxRole.Visible = false;
+                labelRole.Visible = false;
+            }
+
         }
 
         private void LoadRoles()
@@ -45,6 +53,8 @@ namespace InternshipAuthenticationService.Client.UIForms
                         }
                        Enabled = true;
                         comboBoxRole.Text = user.Roles.First<Role>().RoleName;
+                        if (user.Id == _yourUser.Id)
+                            comboBoxRole.DropDownStyle = ComboBoxStyle.DropDown;
                     }
                     catch (FaultException<Models.Faults.InvalidRoleFault> exc)
                     {
@@ -100,7 +110,7 @@ namespace InternshipAuthenticationService.Client.UIForms
         {
             user.Login = textBoxLogin.Text;
             user.FullName = textBoxFullName.Text;
-            IList<Role> roles = new List<Role>();
+            List<Role> roles = new List<Role>();
             roles.Add(new Role(comboBoxRole.Text));
             user.Roles = roles;
         }

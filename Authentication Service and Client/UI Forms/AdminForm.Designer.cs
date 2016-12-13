@@ -35,10 +35,10 @@
             this.textBoxLogin = new System.Windows.Forms.TextBox();
             this.LoginLabel = new System.Windows.Forms.Label();
             this.labelFullName = new System.Windows.Forms.Label();
-            this.labelRoleLabel = new System.Windows.Forms.Label();
             this.SearchUserButton = new System.Windows.Forms.Button();
             this.comboBoxRole = new System.Windows.Forms.ComboBox();
             this.textBoxFullName = new System.Windows.Forms.TextBox();
+            this.labelRoleLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonCreateUser = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -56,6 +56,8 @@
             // 
             // dataGridViewSearch
             // 
+            this.dataGridViewSearch.AllowUserToAddRows = false;
+            this.dataGridViewSearch.AllowUserToDeleteRows = false;
             this.dataGridViewSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSearch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Login,
@@ -66,17 +68,18 @@
             this.dataGridViewSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewSearch.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewSearch.Name = "dataGridViewSearch";
-            this.dataGridViewSearch.Size = new System.Drawing.Size(544, 305);
+            this.dataGridViewSearch.ReadOnly = true;
+            this.dataGridViewSearch.Size = new System.Drawing.Size(606, 232);
             this.dataGridViewSearch.TabIndex = 7;
             this.dataGridViewSearch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSearch_CellClick);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.73949F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.26051F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 198F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 201F));
             this.tableLayoutPanel1.Controls.Add(this.textBoxLogin, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.LoginLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelFullName, 1, 0);
@@ -90,7 +93,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(544, 59);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(606, 59);
             this.tableLayoutPanel1.TabIndex = 15;
             // 
             // textBoxLogin
@@ -98,7 +101,7 @@
             this.textBoxLogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxLogin.Location = new System.Drawing.Point(3, 32);
             this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(105, 20);
+            this.textBoxLogin.Size = new System.Drawing.Size(137, 20);
             this.textBoxLogin.TabIndex = 27;
             // 
             // LoginLabel
@@ -107,7 +110,7 @@
             this.LoginLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.LoginLabel.Location = new System.Drawing.Point(3, 16);
             this.LoginLabel.Name = "LoginLabel";
-            this.LoginLabel.Size = new System.Drawing.Size(105, 13);
+            this.LoginLabel.Size = new System.Drawing.Size(137, 13);
             this.LoginLabel.TabIndex = 23;
             this.LoginLabel.Text = "Login";
             // 
@@ -115,28 +118,19 @@
             // 
             this.labelFullName.AutoSize = true;
             this.labelFullName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelFullName.Location = new System.Drawing.Point(114, 16);
+            this.labelFullName.Location = new System.Drawing.Point(146, 16);
             this.labelFullName.Name = "labelFullName";
-            this.labelFullName.Size = new System.Drawing.Size(110, 13);
+            this.labelFullName.Size = new System.Drawing.Size(137, 13);
             this.labelFullName.TabIndex = 24;
             this.labelFullName.Text = "Full Name";
             // 
-            // labelRoleLabel
-            // 
-            this.labelRoleLabel.AutoSize = true;
-            this.labelRoleLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelRoleLabel.Location = new System.Drawing.Point(230, 16);
-            this.labelRoleLabel.Name = "labelRoleLabel";
-            this.labelRoleLabel.Size = new System.Drawing.Size(112, 13);
-            this.labelRoleLabel.TabIndex = 25;
-            this.labelRoleLabel.Text = "Role";
-            // 
             // SearchUserButton
             // 
-            this.SearchUserButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SearchUserButton.Location = new System.Drawing.Point(348, 32);
+            this.SearchUserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SearchUserButton.Location = new System.Drawing.Point(408, 31);
+            this.SearchUserButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 3);
             this.SearchUserButton.Name = "SearchUserButton";
-            this.SearchUserButton.Size = new System.Drawing.Size(193, 24);
+            this.SearchUserButton.Size = new System.Drawing.Size(195, 23);
             this.SearchUserButton.TabIndex = 26;
             this.SearchUserButton.Text = "Search";
             this.SearchUserButton.UseVisualStyleBackColor = true;
@@ -147,7 +141,7 @@
             this.comboBoxRole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRole.FormattingEnabled = true;
-            this.comboBoxRole.Location = new System.Drawing.Point(230, 32);
+            this.comboBoxRole.Location = new System.Drawing.Point(289, 32);
             this.comboBoxRole.Name = "comboBoxRole";
             this.comboBoxRole.Size = new System.Drawing.Size(112, 21);
             this.comboBoxRole.TabIndex = 29;
@@ -155,26 +149,36 @@
             // textBoxFullName
             // 
             this.textBoxFullName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxFullName.Location = new System.Drawing.Point(114, 32);
+            this.textBoxFullName.Location = new System.Drawing.Point(146, 32);
             this.textBoxFullName.Name = "textBoxFullName";
-            this.textBoxFullName.Size = new System.Drawing.Size(110, 20);
+            this.textBoxFullName.Size = new System.Drawing.Size(137, 20);
             this.textBoxFullName.TabIndex = 28;
+            // 
+            // labelRoleLabel
+            // 
+            this.labelRoleLabel.AutoSize = true;
+            this.labelRoleLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.labelRoleLabel.Location = new System.Drawing.Point(289, 16);
+            this.labelRoleLabel.Name = "labelRoleLabel";
+            this.labelRoleLabel.Size = new System.Drawing.Size(112, 13);
+            this.labelRoleLabel.TabIndex = 25;
+            this.labelRoleLabel.Text = "Role";
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.buttonCreateUser);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 364);
+            this.panel1.Location = new System.Drawing.Point(0, 291);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(544, 34);
+            this.panel1.Size = new System.Drawing.Size(606, 24);
             this.panel1.TabIndex = 16;
             // 
             // buttonCreateUser
             // 
             this.buttonCreateUser.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonCreateUser.Location = new System.Drawing.Point(413, 0);
+            this.buttonCreateUser.Location = new System.Drawing.Point(494, 0);
             this.buttonCreateUser.Name = "buttonCreateUser";
-            this.buttonCreateUser.Size = new System.Drawing.Size(131, 34);
+            this.buttonCreateUser.Size = new System.Drawing.Size(112, 24);
             this.buttonCreateUser.TabIndex = 8;
             this.buttonCreateUser.Text = "CreateUser";
             this.buttonCreateUser.UseVisualStyleBackColor = true;
@@ -186,7 +190,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 59);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(544, 305);
+            this.panel2.Size = new System.Drawing.Size(606, 232);
             this.panel2.TabIndex = 17;
             // 
             // Login
@@ -218,6 +222,7 @@
             this.Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Edit.HeaderText = "Edit ";
             this.Edit.Name = "Edit";
+            this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Edit.Text = "Edit";
             this.Edit.ToolTipText = "Edit";
             this.Edit.UseColumnTextForButtonValue = true;
@@ -227,6 +232,7 @@
             this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Delete.HeaderText = "Delete";
             this.Delete.Name = "Delete";
+            this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Delete.Text = "Delete";
             this.Delete.ToolTipText = "Delete";
             this.Delete.UseColumnTextForButtonValue = true;
@@ -235,10 +241,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 398);
+            this.ClientSize = new System.Drawing.Size(606, 315);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.MinimumSize = new System.Drawing.Size(418, 176);
             this.Name = "AdminForm";
             this.Text = "SearchUserForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSearch)).EndInit();

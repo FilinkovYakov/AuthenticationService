@@ -133,7 +133,7 @@ namespace InternshipAuthenticationService.Client.UIForms
         private User BuildNewUser()
         {
             Role userRole = new Role(comboBoxRole.Text);
-            IList<Role> Roles = new List<Role>();
+            List<Role> Roles = new List<Role>();
             Roles.Add(userRole);
             User user = new User(textBoxLogin.Text, textBoxFullName.Text, Roles);
             return user;

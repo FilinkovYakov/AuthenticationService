@@ -13,13 +13,15 @@ namespace InternshipAuthenticationService.Client.UIForms
     public partial class AdminForm : Form
     {
         List<ClientUser> clientUsers = new List<ClientUser>();
-        User user;
+        private User _user = new User();
         public AdminForm(User user)
         {
             InitializeComponent();
-            this.user = user;
+            this._user = user;
             this.Text = "Welcome " + user.Login + ", you role is " + user.Roles.First<Role>().RoleName;
             dataGridViewSearch.AutoGenerateColumns = false;
+            dataGridViewSearch.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dataGridViewSearch.AllowUserToResizeRows = false;
             LoadRoles();
         }
 
@@ -67,7 +69,7 @@ namespace InternshipAuthenticationService.Client.UIForms
             {
                 ClientUser clientUser = (ClientUser)dataGridViewSearch.Rows[e.RowIndex].DataBoundItem;
                 User user = MapToServiceUser(clientUser);
-                EditUserForm form = new EditUserForm(user);
+                EditUserForm form = new EditUserForm(user, _user);
                 form.Owner = this;
                 form.ShowDialog();
             }
@@ -75,6 +77,10 @@ namespace InternshipAuthenticationService.Client.UIForms
                 if (e.ColumnIndex == 4 && e.RowIndex < dataGridViewSearch.RowCount)
             {
                 ClientUser clientUser = (ClientUser)dataGridViewSearch.Rows[e.RowIndex].DataBoundItem;
+                if (clientUser.Id == _user.Id) {
+                    MessageBox.Show("You can not delete your user!");
+                    return;
+                }
                 User user = MapToServiceUser(clientUser);
                 DialogResult dialogResult = MessageBox.Show(
                     this,
@@ -117,7 +123,7 @@ namespace InternshipAuthenticationService.Client.UIForms
 
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
-            user = null;
+            _user = null;
             Close();
         }
 
@@ -133,14 +139,16 @@ namespace InternshipAuthenticationService.Client.UIForms
             clientUsers = new List<ClientUser>();
             if (users.Count() == 0)
             {
+                dataGridViewSearch.DataSource = clientUsers;
                 MessageBox.Show("Users not found!");
             }
             else {
                 foreach (User user in users) {
                     clientUsers.Add(new ClientUser(user));
                 }
+                dataGridViewSearch.DataSource = clientUsers;
             }
-            dataGridViewSearch.DataSource = clientUsers;
+            
         }
     }
 }
