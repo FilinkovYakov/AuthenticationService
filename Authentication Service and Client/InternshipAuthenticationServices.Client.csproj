@@ -71,12 +71,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="UI Forms\AddRoleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI Forms\AddRoleForm.Designer.cs">
-      <DependentUpon>AddRoleForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI Forms\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,9 +109,6 @@
     <Compile Include="UI Forms\OtherUserForm.Designer.cs">
       <DependentUpon>OtherUserForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UI Forms\AddRoleForm.resx">
-      <DependentUpon>AddRoleForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI Forms\ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </EmbeddedResource>

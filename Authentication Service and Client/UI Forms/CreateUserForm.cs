@@ -115,7 +115,7 @@ namespace InternshipAuthenticationService.Client.UIForms
                 }
                 if (serviceResult.Errors.Contains(OperationErrors.UserExistErr))
                 {
-                    errorProviderLogin.SetError(textBoxLogin, "User with this login exists!");
+                    errorProviderLogin.SetError(textBoxLogin, "User with the same login is already exist!");
                 }
             }
             return serviceResult.Success;

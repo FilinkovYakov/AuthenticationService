@@ -12,13 +12,12 @@ namespace InternshipAuthenticationService.Client.UIForms
 {
     public partial class AdminForm : Form
     {
-        List<ClientUser> clientUsers = new List<ClientUser>();
         private User _user = new User();
         public AdminForm(User user)
         {
             InitializeComponent();
             this._user = user;
-            this.Text = "Welcome " + user.Login + ", you role is " + user.Roles.First<Role>().RoleName;
+            this.Text = "Welcome " + user.Login + ", your role is " + user.Roles.First<Role>().RoleName;
             dataGridViewSearch.AutoGenerateColumns = false;
             dataGridViewSearch.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             dataGridViewSearch.AllowUserToResizeRows = false;
@@ -36,11 +35,11 @@ namespace InternshipAuthenticationService.Client.UIForms
                     try
                     {
                         comboBoxRole.Items.Clear();
+                        comboBoxRole.Items.Add("All roles");
                         foreach (string role in task.Result.Select(r => r.RoleName))
                         {
                             comboBoxRole.Items.Add(role);
                         }
-                        comboBoxRole.Items.Add("All roles");
                         Enabled = true;
                     }
                     catch (FaultException<Models.Faults.InvalidRoleFault> exc)
@@ -58,8 +57,7 @@ namespace InternshipAuthenticationService.Client.UIForms
         private void CreateUserButtonClick(object sender, EventArgs e)
         {
             CreateUserForm createUserForm = new CreateUserForm();
-            createUserForm.Owner = this;
-            createUserForm.ShowDialog();
+            createUserForm.ShowDialog(this);
         }
 
         private void dataGridViewSearch_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -70,21 +68,21 @@ namespace InternshipAuthenticationService.Client.UIForms
                 ClientUser clientUser = (ClientUser)dataGridViewSearch.Rows[e.RowIndex].DataBoundItem;
                 User user = MapToServiceUser(clientUser);
                 EditUserForm form = new EditUserForm(user, _user);
-                form.Owner = this;
-                form.ShowDialog();
+                form.ShowDialog(this);
             }
             else
                 if (e.ColumnIndex == 4 && e.RowIndex < dataGridViewSearch.RowCount)
             {
                 ClientUser clientUser = (ClientUser)dataGridViewSearch.Rows[e.RowIndex].DataBoundItem;
-                if (clientUser.Id == _user.Id) {
-                    MessageBox.Show("You can not delete your user!");
+                if (clientUser.Id == _user.Id)
+                {
+                    MessageBox.Show(this, "You can not delete yourself!");
                     return;
                 }
                 User user = MapToServiceUser(clientUser);
                 DialogResult dialogResult = MessageBox.Show(
                     this,
-                    string.Format("Are you sure you want delete '{0}' user?", user.FullName),
+                    string.Format("Are you sure to delete '{0}' user?", user.FullName),
                     "Delete user",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information,
@@ -92,15 +90,20 @@ namespace InternshipAuthenticationService.Client.UIForms
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    AuthenticationServiceClient client = new AuthenticationServiceClient();
-                    OperationResult serviceResult = client.DeleteUser(user);
-                    if (!serviceResult.Success)
+                    try
                     {
-                        MessageBox.Show("Users not found!");
-                    }                   
+                        AuthenticationServiceClient client = new AuthenticationServiceClient();
+                        OperationResult serviceResult = client.DeleteUser(user);
+                        if (!serviceResult.Success)
+                        {
+                            MessageBox.Show(this, "Users not found!");
+                        }
+                    }
+                    catch (FaultException exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
                 }
-
-
             }
         }
 
@@ -114,13 +117,6 @@ namespace InternshipAuthenticationService.Client.UIForms
             return user;
         }
 
-        private void buttonAddRole_Click(object sender, EventArgs e)
-        {
-            AddRoleForm addRoleForm = new AddRoleForm();
-            addRoleForm.Owner = this;
-            addRoleForm.ShowDialog();
-        }
-
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
             _user = null;
@@ -129,26 +125,25 @@ namespace InternshipAuthenticationService.Client.UIForms
 
         private void SearchUserButton_Click(object sender, EventArgs e)
         {
-            AuthenticationServiceClient client = new AuthenticationServiceClient();
-            string roleName = comboBoxRole.Text;
-            if (roleName.ToLower().Equals("all roles"))
+            try
             {
-                roleName = "";
-            }
-            User[] users = client.SearchUser(textBoxLogin.Text, textBoxFullName.Text, roleName);
-            clientUsers = new List<ClientUser>();
-            if (users.Count() == 0)
-            {
-                dataGridViewSearch.DataSource = clientUsers;
-                MessageBox.Show("Users not found!");
-            }
-            else {
-                foreach (User user in users) {
-                    clientUsers.Add(new ClientUser(user));
+                AuthenticationServiceClient client = new AuthenticationServiceClient();
+                string roleName = comboBoxRole.Text;
+                if (roleName.ToLower().Equals("all roles"))
+                {
+                    roleName = "";
                 }
-                dataGridViewSearch.DataSource = clientUsers;
+                User[] users = client.SearchUser(textBoxLogin.Text, textBoxFullName.Text, roleName);
+                dataGridViewSearch.DataSource = users.Select(user => new ClientUser(user)).ToList();
+                if (users.Length == 0)
+                {
+                    MessageBox.Show("Users not found!");
+                }
             }
-            
+            catch (FaultException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
     }
 }

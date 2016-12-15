@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InternshipAuthenticationService.Client.AuthenticationService;
 using InternshipAuthenticationService.Models.ServiceModels;
+using System.ServiceModel;
 
 namespace InternshipAuthenticationService.Client.UIForms
 {
@@ -27,13 +28,21 @@ namespace InternshipAuthenticationService.Client.UIForms
             ClearErrorProvidres();
             if (!ValidateUserData())
                 return;
-            AuthenticationServiceClient client = new AuthenticationServiceClient();
-            OperationResult serviceResult = client.ChangePassword(user, textBoxNewPassword.Text);
-            if (serviceResult.Success)
-                Close();
-            if (serviceResult.Errors.Contains(OperationErrors.PassErr))
+            try
             {
-                errorProviderNewPassword.SetError(textBoxNewPassword, "Password is not valid!");
+                AuthenticationServiceClient client = new AuthenticationServiceClient();
+                OperationResult serviceResult = client.ChangePassword(user, textBoxNewPassword.Text);
+                if (serviceResult.Success)
+                    Close();
+                if (serviceResult.Errors.Contains(OperationErrors.PassErr))
+                {
+                    errorProviderNewPassword.SetError(textBoxNewPassword, "Password is not valid!");
+                }
+
+            }
+            catch (FaultException exc)
+            {
+                MessageBox.Show(exc.Message);
             }
         }
 

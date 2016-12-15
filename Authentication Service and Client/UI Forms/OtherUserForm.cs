@@ -19,7 +19,7 @@ namespace InternshipAuthenticationService.Client.UIForms
         {
             InitializeComponent();
             this.user = user;
-            Text = "Welcome " + user.Login + ", you role is " + user.Roles.First<Role>().RoleName;
+            Text = "Welcome " + user.Login + ", your role is " + user.Roles.First<Role>().RoleName;
         }
 
         private void button1_Click(object sender, EventArgs e)

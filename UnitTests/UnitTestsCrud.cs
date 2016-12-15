@@ -52,7 +52,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.NullErr), Is.True);
             Assert.That(result.Errors.Contains(OperationErrors.PassErr), Is.True);
-            Assert.That(result.Errors.Count() == 2, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(2));
             userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetByLogin(It.IsAny<string>()), Times.Never);
         }
@@ -77,7 +77,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.LoginErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
             userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetByLogin(It.IsAny<string>()), Times.Once);
         }
@@ -102,7 +102,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.FullNameErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
             userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetByLogin(It.IsAny<string>()), Times.Once);
         }
@@ -127,7 +127,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.RoleErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
             userRepositoryMock.Verify(x => x.GetByLogin(It.IsAny<string>()), Times.Once);
             userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
         }
@@ -152,7 +152,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.PassErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
             userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetByLogin(It.IsAny<string>()), Times.Once);
         }
@@ -179,7 +179,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.UserExistErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
             userRepositoryMock.Verify(x => x.GetByLogin(It.IsAny<string>()), Times.Once);
             userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
         }
@@ -220,7 +220,7 @@ namespace InternshipAuthenticationService.UnitTests
             });
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Success, Is.True);
-            Assert.That(result.Errors.Count() == 0, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(0));
             userRepositoryMock.Verify(x => x.Update(It.IsAny<Models.EFModels.User>()), Times.Once);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
@@ -236,8 +236,8 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.NullErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
-            userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
+            userRepositoryMock.Verify(x => x.Update(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Never);
         }
 
@@ -261,8 +261,8 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.LoginErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
-            userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
+            userRepositoryMock.Verify(x => x.Update(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
 
@@ -287,8 +287,8 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.FullNameErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
-            userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
+            userRepositoryMock.Verify(x => x.Update(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
 
@@ -313,8 +313,8 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.RoleErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
-            userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
+            userRepositoryMock.Verify(x => x.Update(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
 
@@ -338,8 +338,8 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.UserNotExistErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
-            userRepositoryMock.Verify(x => x.Create(It.IsAny<Models.EFModels.User>()), Times.Never);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
+            userRepositoryMock.Verify(x => x.Update(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
 
@@ -364,7 +364,7 @@ namespace InternshipAuthenticationService.UnitTests
             });
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Success, Is.True);
-            Assert.That(result.Errors.Count() == 0, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(0));
             userRepositoryMock.Verify(x => x.Delete(It.IsAny<Models.EFModels.User>()), Times.Once);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
@@ -389,7 +389,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.UserNotExistErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
             userRepositoryMock.Verify(x => x.Delete(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
@@ -406,7 +406,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.NullErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
             userRepositoryMock.Verify(x => x.Delete(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Never);
         }
@@ -433,7 +433,7 @@ namespace InternshipAuthenticationService.UnitTests
             }, "password");
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Success, Is.True);
-            Assert.That(result.Errors.Count() == 0, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(0));
             userRepositoryMock.Verify(x => x.ChangePassword(It.IsAny<Models.EFModels.User>()), Times.Once);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
@@ -451,7 +451,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.NullErr), Is.True);
             Assert.That(result.Errors.Contains(OperationErrors.PassErr), Is.True);
-            Assert.That(result.Errors.Count() == 2, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(2));
             userRepositoryMock.Verify(x => x.ChangePassword(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Never);
         }
@@ -476,7 +476,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors.Contains(OperationErrors.UserNotExistErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
             userRepositoryMock.Verify(x => x.ChangePassword(It.IsAny<Models.EFModels.User>()), Times.Never);
             userRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
         }
@@ -515,7 +515,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.AutorizationFiledErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
             userRepositoryMock.Verify(x => x.GetByLogin(It.IsAny<string>()), Times.Once);
         }
 
@@ -536,7 +536,7 @@ namespace InternshipAuthenticationService.UnitTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors.Contains(OperationErrors.AutorizationFiledErr), Is.True);
-            Assert.That(result.Errors.Count() == 1, Is.True);
+            Assert.That(result.Errors.Count, Is.EqualTo(1));
             userRepositoryMock.Verify(x => x.GetByLogin(It.IsAny<string>()), Times.Once);
         }
 

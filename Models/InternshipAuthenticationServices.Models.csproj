@@ -45,9 +45,9 @@
   <ItemGroup>
     <Compile Include="EFModels\Role.cs" />
     <Compile Include="EFModels\User.cs" />
-    <Compile Include="Exceptions\InvalidRoleFault.cs" />
+    <Compile Include="Exceptions\InvalidRoleException.cs" />
     <Compile Include="Operation Result\OperationResult.cs" />
-    <Compile Include="Operation Result\OperationResult.OperationErrors.cs" />
+    <Compile Include="Operation Result\OperationErrors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Faults\InvalidRoleFault.cs" />
     <Compile Include="ServiceModels\Role.cs" />

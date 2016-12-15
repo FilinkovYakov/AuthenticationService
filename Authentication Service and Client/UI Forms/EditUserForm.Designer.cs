@@ -48,7 +48,7 @@
             // 
             // buttonEditUser
             // 
-            this.buttonEditUser.Location = new System.Drawing.Point(59, 227);
+            this.buttonEditUser.Location = new System.Drawing.Point(16, 192);
             this.buttonEditUser.Name = "buttonEditUser";
             this.buttonEditUser.Size = new System.Drawing.Size(75, 23);
             this.buttonEditUser.TabIndex = 0;
@@ -58,7 +58,8 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(155, 227);
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Location = new System.Drawing.Point(167, 192);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 1;
@@ -97,23 +98,23 @@
             // 
             this.textBoxLogin.Location = new System.Drawing.Point(130, 30);
             this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLogin.Size = new System.Drawing.Size(112, 20);
             this.textBoxLogin.TabIndex = 5;
             // 
             // textBoxFullName
             // 
             this.textBoxFullName.Location = new System.Drawing.Point(130, 65);
             this.textBoxFullName.Name = "textBoxFullName";
-            this.textBoxFullName.Size = new System.Drawing.Size(100, 20);
+            this.textBoxFullName.Size = new System.Drawing.Size(112, 20);
             this.textBoxFullName.TabIndex = 6;
             // 
             // buttonChangePassword
             // 
             this.buttonChangePassword.Location = new System.Drawing.Point(130, 134);
             this.buttonChangePassword.Name = "buttonChangePassword";
-            this.buttonChangePassword.Size = new System.Drawing.Size(100, 23);
+            this.buttonChangePassword.Size = new System.Drawing.Size(112, 23);
             this.buttonChangePassword.TabIndex = 8;
-            this.buttonChangePassword.Text = "Change password";
+            this.buttonChangePassword.Text = "Change Password";
             this.buttonChangePassword.UseVisualStyleBackColor = true;
             this.buttonChangePassword.Click += new System.EventHandler(this.buttonChangePassword_Click);
             // 
@@ -127,7 +128,7 @@
             "intern"});
             this.comboBoxRole.Location = new System.Drawing.Point(130, 98);
             this.comboBoxRole.Name = "comboBoxRole";
-            this.comboBoxRole.Size = new System.Drawing.Size(100, 21);
+            this.comboBoxRole.Size = new System.Drawing.Size(112, 21);
             this.comboBoxRole.TabIndex = 9;
             // 
             // errorProviderLogin
@@ -144,9 +145,11 @@
             // 
             // EditUserForm
             // 
+            this.AcceptButton = this.buttonEditUser;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(266, 262);
+            this.CancelButton = this.buttonCancel;
+            this.ClientSize = new System.Drawing.Size(266, 240);
             this.Controls.Add(this.comboBoxRole);
             this.Controls.Add(this.buttonChangePassword);
             this.Controls.Add(this.textBoxFullName);

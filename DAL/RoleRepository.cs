@@ -21,7 +21,7 @@ namespace InternshipAuthenticationService.DAL
 
         public Role GetById(int roleId)
         {
-            return db.Roles.Where(s => s.Id == roleId).FirstOrDefault<Role>();
+            return db.Roles.FirstOrDefault(s => s.Id == roleId);
         }
 
         public void Create(Role role)
@@ -37,7 +37,7 @@ namespace InternshipAuthenticationService.DAL
 
         public void Delete(Role role)
         {
-            Role newRole = db.Roles.Where(s => s.RoleName == role.RoleName).FirstOrDefault<Role>();
+            Role newRole = db.Roles.FirstOrDefault(s => s.RoleName == role.RoleName);
             if (newRole != null)
                 db.Roles.Remove(newRole);
         }

@@ -87,9 +87,9 @@
             this.ConfirmPassword.AutoSize = true;
             this.ConfirmPassword.Location = new System.Drawing.Point(25, 137);
             this.ConfirmPassword.Name = "ConfirmPassword";
-            this.ConfirmPassword.Size = new System.Drawing.Size(90, 13);
+            this.ConfirmPassword.Size = new System.Drawing.Size(91, 13);
             this.ConfirmPassword.TabIndex = 3;
-            this.ConfirmPassword.Text = "Confirm password";
+            this.ConfirmPassword.Text = "Confirm Password";
             // 
             // Role
             // 
@@ -136,7 +136,7 @@
             this.CreateUserButton.Name = "CreateUserButton";
             this.CreateUserButton.Size = new System.Drawing.Size(75, 23);
             this.CreateUserButton.TabIndex = 10;
-            this.CreateUserButton.Text = "Create user";
+            this.CreateUserButton.Text = "Create User";
             this.CreateUserButton.UseVisualStyleBackColor = true;
             this.CreateUserButton.Click += new System.EventHandler(this.CreateUserButtonClick);
             // 
@@ -181,6 +181,7 @@
             // 
             // CreateUserForm
             // 
+            this.AcceptButton = this.CreateUserButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
@@ -201,7 +202,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CreateUserForm";
-            this.Text = "Create user form";
+            this.Text = "Create User Form";
             ((System.ComponentModel.ISupportInitialize)(this.tableBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderPass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderConfPass)).EndInit();

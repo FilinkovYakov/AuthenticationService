@@ -46,26 +46,26 @@
             this.labelNewPassword.AutoSize = true;
             this.labelNewPassword.Location = new System.Drawing.Point(27, 21);
             this.labelNewPassword.Name = "labelNewPassword";
-            this.labelNewPassword.Size = new System.Drawing.Size(75, 13);
+            this.labelNewPassword.Size = new System.Drawing.Size(78, 13);
             this.labelNewPassword.TabIndex = 1;
-            this.labelNewPassword.Text = "NewPassword";
+            this.labelNewPassword.Text = "New Password";
             // 
             // labelConfirmPassword
             // 
             this.labelConfirmPassword.AutoSize = true;
             this.labelConfirmPassword.Location = new System.Drawing.Point(27, 59);
             this.labelConfirmPassword.Name = "labelConfirmPassword";
-            this.labelConfirmPassword.Size = new System.Drawing.Size(90, 13);
+            this.labelConfirmPassword.Size = new System.Drawing.Size(91, 13);
             this.labelConfirmPassword.TabIndex = 2;
-            this.labelConfirmPassword.Text = "Confirm password";
+            this.labelConfirmPassword.Text = "Confirm Password";
             // 
             // buttonChangePassword
             // 
             this.buttonChangePassword.Location = new System.Drawing.Point(30, 97);
             this.buttonChangePassword.Name = "buttonChangePassword";
-            this.buttonChangePassword.Size = new System.Drawing.Size(100, 23);
+            this.buttonChangePassword.Size = new System.Drawing.Size(104, 23);
             this.buttonChangePassword.TabIndex = 3;
-            this.buttonChangePassword.Text = "ChangePassword";
+            this.buttonChangePassword.Text = "Change Password";
             this.buttonChangePassword.UseVisualStyleBackColor = true;
             this.buttonChangePassword.Click += new System.EventHandler(this.buttonChangePassword_Click);
             // 
@@ -87,6 +87,7 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(201, 97);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -105,8 +106,10 @@
             // 
             // ChangePasswordForm
             // 
+            this.AcceptButton = this.buttonChangePassword;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(311, 162);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxConfirmPassword);

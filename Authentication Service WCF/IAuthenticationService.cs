@@ -18,6 +18,7 @@ namespace InternshipAuthenticationService.AuthenticationService
         OperationResult CreateUser(User user, string password);   
 
         [OperationContract]
+        [FaultContract(typeof(InvalidRoleFault))]
         OperationResult UpdateUser(User user);
 
         [OperationContract]

@@ -78,11 +78,22 @@ namespace InternshipAuthenticationService.Client.UIForms
         {
             ClearErrorProvidres();
             BuildUser();
-            AuthenticationServiceClient client = new AuthenticationServiceClient();
+            try
+            {
+                AuthenticationServiceClient client = new AuthenticationServiceClient();
             OperationResult serviceResult = client.UpdateUser(user);
             if (CheckServiceResult(serviceResult))
             {
                 Close();
+            }
+            }
+            catch (FaultException<Models.Faults.InvalidRoleFault> exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            catch (FaultException exc)
+            {
+                MessageBox.Show(exc.Message);
             }
         }
 

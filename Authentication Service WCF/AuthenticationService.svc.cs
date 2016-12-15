@@ -225,7 +225,7 @@ namespace InternshipAuthenticationService.AuthenticationService
             return Mapper.Map<List<Models.ServiceModels.User>>(_userRepository.GetAll());
         }
 
-        public bool IsExists(Models.ServiceModels.User user)
+        private bool IsExists(Models.ServiceModels.User user)
         {
             return _userRepository.GetByLogin(user.Login) != null;
         }

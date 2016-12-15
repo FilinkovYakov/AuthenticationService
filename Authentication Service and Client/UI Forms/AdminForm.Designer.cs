@@ -31,11 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             this.dataGridViewSearch = new System.Windows.Forms.DataGridView();
-            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxLogin = new System.Windows.Forms.TextBox();
@@ -48,6 +43,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonCreateUser = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -74,59 +74,13 @@
             this.dataGridViewSearch.TabIndex = 7;
             this.dataGridViewSearch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSearch_CellClick);
             // 
-            // Login
-            // 
-            this.Login.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Login.DataPropertyName = "Login";
-            this.Login.HeaderText = "Login";
-            this.Login.Name = "Login";
-            this.Login.ReadOnly = true;
-            // 
-            // FullName
-            // 
-            this.FullName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FullName.DataPropertyName = "FullName";
-            this.FullName.HeaderText = "FullName";
-            this.FullName.Name = "FullName";
-            this.FullName.ReadOnly = true;
-            // 
-            // Role
-            // 
-            this.Role.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Role.DataPropertyName = "Role";
-            this.Role.HeaderText = "Role";
-            this.Role.Name = "Role";
-            this.Role.ReadOnly = true;
-            // 
-            // Edit
-            // 
-            this.Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Edit.HeaderText = "Edit ";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Edit.Name = "Edit";
-            this.Edit.ReadOnly = true;
-            this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Edit.ToolTipText = "Edit";
-            // 
-            // Delete
-            // 
-            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Delete.HeaderText = "Delete";
-            this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
-            this.Delete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Delete.Name = "Delete";
-            this.Delete.ReadOnly = true;
-            this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Delete.ToolTipText = "Delete";
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 202F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.Controls.Add(this.textBoxLogin, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.LoginLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelFullName, 1, 0);
@@ -148,7 +102,7 @@
             this.textBoxLogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxLogin.Location = new System.Drawing.Point(3, 32);
             this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(137, 20);
+            this.textBoxLogin.Size = new System.Drawing.Size(184, 20);
             this.textBoxLogin.TabIndex = 27;
             // 
             // LoginLabel
@@ -157,7 +111,7 @@
             this.LoginLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.LoginLabel.Location = new System.Drawing.Point(3, 16);
             this.LoginLabel.Name = "LoginLabel";
-            this.LoginLabel.Size = new System.Drawing.Size(137, 13);
+            this.LoginLabel.Size = new System.Drawing.Size(184, 13);
             this.LoginLabel.TabIndex = 23;
             this.LoginLabel.Text = "Login";
             // 
@@ -165,19 +119,19 @@
             // 
             this.labelFullName.AutoSize = true;
             this.labelFullName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelFullName.Location = new System.Drawing.Point(146, 16);
+            this.labelFullName.Location = new System.Drawing.Point(193, 16);
             this.labelFullName.Name = "labelFullName";
-            this.labelFullName.Size = new System.Drawing.Size(137, 13);
+            this.labelFullName.Size = new System.Drawing.Size(184, 13);
             this.labelFullName.TabIndex = 24;
             this.labelFullName.Text = "Full Name";
             // 
             // SearchUserButton
             // 
             this.SearchUserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchUserButton.Location = new System.Drawing.Point(408, 31);
+            this.SearchUserButton.Location = new System.Drawing.Point(508, 31);
             this.SearchUserButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 3);
             this.SearchUserButton.Name = "SearchUserButton";
-            this.SearchUserButton.Size = new System.Drawing.Size(195, 23);
+            this.SearchUserButton.Size = new System.Drawing.Size(95, 23);
             this.SearchUserButton.TabIndex = 26;
             this.SearchUserButton.Text = "Search";
             this.SearchUserButton.UseVisualStyleBackColor = true;
@@ -188,26 +142,26 @@
             this.comboBoxRole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRole.FormattingEnabled = true;
-            this.comboBoxRole.Location = new System.Drawing.Point(289, 32);
+            this.comboBoxRole.Location = new System.Drawing.Point(383, 32);
             this.comboBoxRole.Name = "comboBoxRole";
-            this.comboBoxRole.Size = new System.Drawing.Size(112, 21);
+            this.comboBoxRole.Size = new System.Drawing.Size(119, 21);
             this.comboBoxRole.TabIndex = 29;
             // 
             // textBoxFullName
             // 
             this.textBoxFullName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxFullName.Location = new System.Drawing.Point(146, 32);
+            this.textBoxFullName.Location = new System.Drawing.Point(193, 32);
             this.textBoxFullName.Name = "textBoxFullName";
-            this.textBoxFullName.Size = new System.Drawing.Size(137, 20);
+            this.textBoxFullName.Size = new System.Drawing.Size(184, 20);
             this.textBoxFullName.TabIndex = 28;
             // 
             // labelRoleLabel
             // 
             this.labelRoleLabel.AutoSize = true;
             this.labelRoleLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelRoleLabel.Location = new System.Drawing.Point(289, 16);
+            this.labelRoleLabel.Location = new System.Drawing.Point(383, 16);
             this.labelRoleLabel.Name = "labelRoleLabel";
-            this.labelRoleLabel.Size = new System.Drawing.Size(112, 13);
+            this.labelRoleLabel.Size = new System.Drawing.Size(119, 13);
             this.labelRoleLabel.TabIndex = 25;
             this.labelRoleLabel.Text = "Role";
             // 
@@ -239,6 +193,57 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(606, 232);
             this.panel2.TabIndex = 17;
+            // 
+            // Login
+            // 
+            this.Login.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Login.DataPropertyName = "Login";
+            this.Login.FillWeight = 131.5905F;
+            this.Login.HeaderText = "Login";
+            this.Login.Name = "Login";
+            this.Login.ReadOnly = true;
+            // 
+            // FullName
+            // 
+            this.FullName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FullName.DataPropertyName = "FullName";
+            this.FullName.FillWeight = 131.5905F;
+            this.FullName.HeaderText = "FullName";
+            this.FullName.Name = "FullName";
+            this.FullName.ReadOnly = true;
+            // 
+            // Role
+            // 
+            this.Role.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Role.DataPropertyName = "Role";
+            this.Role.FillWeight = 131.5905F;
+            this.Role.HeaderText = "Role";
+            this.Role.Name = "Role";
+            this.Role.ReadOnly = true;
+            // 
+            // Edit
+            // 
+            this.Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Edit.FillWeight = 50F;
+            this.Edit.HeaderText = "Edit ";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Edit.Name = "Edit";
+            this.Edit.ReadOnly = true;
+            this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Edit.ToolTipText = "Edit";
+            // 
+            // Delete
+            // 
+            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Delete.FillWeight = 50F;
+            this.Delete.HeaderText = "Delete";
+            this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
+            this.Delete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Delete.ToolTipText = "Delete";
             // 
             // AdminForm
             // 

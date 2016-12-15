@@ -25,27 +25,33 @@ namespace InternshipAuthenticationService.Client.UIForms
 
         private void buttonSignIn_Click(object sender, EventArgs e)
         {
-
-            AuthenticationServiceClient client = new AuthenticationServiceClient();
-            OperationResult<User> result = client.AuthorizationUser(textBoxLogin.Text, textBoxPassword.Text);
-            if (result.Success)
+            try
             {
-                Hide();
-                if (result.Result.Roles.First<Role>().RoleName.Equals("Admin"))
+                AuthenticationServiceClient client = new AuthenticationServiceClient();
+                OperationResult<User> result = client.AuthorizationUser(textBoxLogin.Text, textBoxPassword.Text);
+                if (result.Success)
                 {
-                    AdminForm adminForm = new AdminForm(result.Result);
-                    adminForm.FormClosed += FormClosed;
-                    adminForm.Show();
+                    Hide();
+                    if (result.Result.Roles.First<Role>().RoleName.Equals("Admin"))
+                    {
+                        AdminForm adminForm = new AdminForm(result.Result);
+                        adminForm.FormClosed += FormClosed;
+                        adminForm.Show();
+                    }
+                    else
+                    {
+                        OtherUserForm otherUserForm = new OtherUserForm(result.Result);
+                        otherUserForm.FormClosed += FormClosed;
+                        otherUserForm.Show();
+                    }
                 }
                 else
-                {
-                    OtherUserForm otherUserForm = new OtherUserForm(result.Result);
-                    otherUserForm.FormClosed += FormClosed;
-                    otherUserForm.Show();
-                }
+                    MessageBox.Show("Invalid login or password!");
             }
-            else
-                MessageBox.Show("Invalid login or password!");
+            catch (FaultException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void FormClosed(object sender, FormClosedEventArgs e)
