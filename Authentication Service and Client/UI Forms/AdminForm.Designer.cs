@@ -80,7 +80,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
             this.tableLayoutPanel1.Controls.Add(this.textBoxLogin, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.LoginLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelFullName, 1, 0);
@@ -181,7 +181,7 @@
             this.buttonCreateUser.Name = "buttonCreateUser";
             this.buttonCreateUser.Size = new System.Drawing.Size(112, 24);
             this.buttonCreateUser.TabIndex = 8;
-            this.buttonCreateUser.Text = "CreateUser";
+            this.buttonCreateUser.Text = "Create User";
             this.buttonCreateUser.UseVisualStyleBackColor = true;
             this.buttonCreateUser.Click += new System.EventHandler(this.CreateUserButtonClick);
             // 
@@ -200,6 +200,7 @@
             this.Login.DataPropertyName = "Login";
             this.Login.FillWeight = 131.5905F;
             this.Login.HeaderText = "Login";
+            this.Login.MinimumWidth = 70;
             this.Login.Name = "Login";
             this.Login.ReadOnly = true;
             // 
@@ -208,7 +209,8 @@
             this.FullName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.FullName.DataPropertyName = "FullName";
             this.FullName.FillWeight = 131.5905F;
-            this.FullName.HeaderText = "FullName";
+            this.FullName.HeaderText = "Full Name";
+            this.FullName.MinimumWidth = 70;
             this.FullName.Name = "FullName";
             this.FullName.ReadOnly = true;
             // 
@@ -218,6 +220,7 @@
             this.Role.DataPropertyName = "Role";
             this.Role.FillWeight = 131.5905F;
             this.Role.HeaderText = "Role";
+            this.Role.MinimumWidth = 70;
             this.Role.Name = "Role";
             this.Role.ReadOnly = true;
             // 
@@ -228,6 +231,7 @@
             this.Edit.HeaderText = "Edit ";
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
             this.Edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Edit.MinimumWidth = 30;
             this.Edit.Name = "Edit";
             this.Edit.ReadOnly = true;
             this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -240,6 +244,7 @@
             this.Delete.HeaderText = "Delete";
             this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
             this.Delete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Delete.MinimumWidth = 30;
             this.Delete.Name = "Delete";
             this.Delete.ReadOnly = true;
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.False;

@@ -7,12 +7,14 @@ using InternshipAuthenticationService.Models.ServiceModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.ServiceModel;
+using System.ComponentModel;
 
 namespace InternshipAuthenticationService.Client.UIForms
 {
     public partial class AdminForm : Form
     {
         private User _user = new User();
+        private User[] users = new User[5];
         public AdminForm(User user)
         {
             InitializeComponent();
@@ -63,15 +65,18 @@ namespace InternshipAuthenticationService.Client.UIForms
         private void dataGridViewSearch_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            if (e.ColumnIndex == 3 && e.RowIndex < dataGridViewSearch.RowCount)
+            if (e.ColumnIndex == 3 && e.RowIndex < dataGridViewSearch.RowCount && e.RowIndex >= 0)
             {
                 ClientUser clientUser = (ClientUser)dataGridViewSearch.Rows[e.RowIndex].DataBoundItem;
                 User user = MapToServiceUser(clientUser);
                 EditUserForm form = new EditUserForm(user, _user);
                 form.ShowDialog(this);
+                dataGridViewSearch.Rows[e.RowIndex].Cells[0].Value = user.Login;
+                dataGridViewSearch.Rows[e.RowIndex].Cells[1].Value = user.FullName;
+                dataGridViewSearch.Rows[e.RowIndex].Cells[2].Value = user.Roles.First().RoleName;
             }
             else
-                if (e.ColumnIndex == 4 && e.RowIndex < dataGridViewSearch.RowCount)
+                if (e.ColumnIndex == 4 && e.RowIndex < dataGridViewSearch.RowCount && e.RowIndex >= 0)
             {
                 ClientUser clientUser = (ClientUser)dataGridViewSearch.Rows[e.RowIndex].DataBoundItem;
                 if (clientUser.Id == _user.Id)
@@ -97,6 +102,10 @@ namespace InternshipAuthenticationService.Client.UIForms
                         if (!serviceResult.Success)
                         {
                             MessageBox.Show(this, "Users not found!");
+                        }
+                        else
+                        {
+                            dataGridViewSearch.Rows.RemoveAt(e.RowIndex);
                         }
                     }
                     catch (FaultException exc)
@@ -134,7 +143,7 @@ namespace InternshipAuthenticationService.Client.UIForms
                     roleName = "";
                 }
                 User[] users = client.SearchUser(textBoxLogin.Text, textBoxFullName.Text, roleName);
-                dataGridViewSearch.DataSource = users.Select(user => new ClientUser(user)).ToList();
+                dataGridViewSearch.DataSource = new BindingList<ClientUser>(users.Select(user => new ClientUser(user)).ToList());
                 if (users.Length == 0)
                 {
                     MessageBox.Show("Users not found!");
