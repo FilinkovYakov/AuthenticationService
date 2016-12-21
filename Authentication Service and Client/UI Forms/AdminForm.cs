@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using System.ComponentModel;
+using InternshipAuthenticationService.Client.UI_Forms;
 
 namespace InternshipAuthenticationService.Client.UIForms
 {
@@ -62,7 +63,7 @@ namespace InternshipAuthenticationService.Client.UIForms
             createUserForm.ShowDialog(this);
         }
 
-        private void dataGridViewSearch_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void dataGridViewSearch_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
             if (e.ColumnIndex == 3 && e.RowIndex < dataGridViewSearch.RowCount && e.RowIndex >= 0)
@@ -70,10 +71,12 @@ namespace InternshipAuthenticationService.Client.UIForms
                 ClientUser clientUser = (ClientUser)dataGridViewSearch.Rows[e.RowIndex].DataBoundItem;
                 User user = MapToServiceUser(clientUser);
                 EditUserForm form = new EditUserForm(user, _user);
-                form.ShowDialog(this);
-                dataGridViewSearch.Rows[e.RowIndex].Cells[0].Value = user.Login;
-                dataGridViewSearch.Rows[e.RowIndex].Cells[1].Value = user.FullName;
-                dataGridViewSearch.Rows[e.RowIndex].Cells[2].Value = user.Roles.First().RoleName;
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    dataGridViewSearch.Rows[e.RowIndex].Cells[0].Value = user.Login;
+                    dataGridViewSearch.Rows[e.RowIndex].Cells[1].Value = user.FullName;
+                    dataGridViewSearch.Rows[e.RowIndex].Cells[2].Value = user.Roles.First().RoleName;
+                }
             }
             else
                 if (e.ColumnIndex == 4 && e.RowIndex < dataGridViewSearch.RowCount && e.RowIndex >= 0)
@@ -98,7 +101,10 @@ namespace InternshipAuthenticationService.Client.UIForms
                     try
                     {
                         AuthenticationServiceClient client = new AuthenticationServiceClient();
-                        OperationResult serviceResult = client.DeleteUser(user);
+                        Form frm = new ProgressForm();
+                        frm.Show();
+                        OperationResult serviceResult = await client.DeleteUserAsync(user);
+                        frm.Close();
                         if (!serviceResult.Success)
                         {
                             MessageBox.Show(this, "Users not found!");
@@ -132,7 +138,7 @@ namespace InternshipAuthenticationService.Client.UIForms
             Close();
         }
 
-        private void SearchUserButton_Click(object sender, EventArgs e)
+        private async void SearchUserButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -142,7 +148,10 @@ namespace InternshipAuthenticationService.Client.UIForms
                 {
                     roleName = "";
                 }
-                User[] users = client.SearchUser(textBoxLogin.Text, textBoxFullName.Text, roleName);
+                Form frm = new ProgressForm();
+                frm.Show();
+                User[] users = await client.SearchUserAsync(textBoxLogin.Text, textBoxFullName.Text, roleName);
+                frm.Close();
                 dataGridViewSearch.DataSource = new BindingList<ClientUser>(users.Select(user => new ClientUser(user)).ToList());
                 if (users.Length == 0)
                 {

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using InternshipAuthenticationService.Client.AuthenticationService;
 using InternshipAuthenticationService.Models.ServiceModels;
 using System.ServiceModel;
+using InternshipAuthenticationService.Client.UI_Forms;
 
 namespace InternshipAuthenticationService.Client.UIForms
 {
@@ -23,7 +24,7 @@ namespace InternshipAuthenticationService.Client.UIForms
             this.user = user;
         }
 
-        private void buttonChangePassword_Click(object sender, EventArgs e)
+        private async void buttonChangePassword_Click(object sender, EventArgs e)
         {
             ClearErrorProvidres();
             if (!ValidateUserData())
@@ -31,7 +32,10 @@ namespace InternshipAuthenticationService.Client.UIForms
             try
             {
                 AuthenticationServiceClient client = new AuthenticationServiceClient();
-                OperationResult serviceResult = client.ChangePassword(user, textBoxNewPassword.Text);
+                Form frm = new ProgressForm();
+                frm.Show();
+                OperationResult serviceResult = await client.ChangePasswordAsync(user, textBoxNewPassword.Text);
+                frm.Close();
                 if (serviceResult.Success)
                     Close();
                 if (serviceResult.Errors.Contains(OperationErrors.PassErr))

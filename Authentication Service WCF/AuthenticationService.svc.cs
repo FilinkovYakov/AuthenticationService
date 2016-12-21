@@ -204,6 +204,8 @@ namespace InternshipAuthenticationService.AuthenticationService
                 }
                 if (!IsExistsById(user.Id))
                     res.AddResultCode(OperationErrors.UserNotExistErr);
+                if (IsExistsLogin(user))
+                    res.AddResultCode(OperationErrors.UserExistErr);
             }
             if (res.Success)
             {
@@ -228,6 +230,13 @@ namespace InternshipAuthenticationService.AuthenticationService
         private bool IsExists(Models.ServiceModels.User user)
         {
             return _userRepository.GetByLogin(user.Login) != null;
+        }
+
+        private bool IsExistsLogin(Models.ServiceModels.User user)
+        {
+            if (_userRepository.GetByLogin(user.Login) != null)
+                return _userRepository.GetByLogin(user.Login).Id != user.Id;
+            return false;
         }
 
         private bool IsExistsById(int id)

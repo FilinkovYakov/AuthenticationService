@@ -8,6 +8,7 @@ using InternshipAuthenticationService.Models.OperationResult;
 using InternshipAuthenticationService.Models.Faults;
 using InternshipAuthenticationService.Models.ServiceModels;
 using InternshipAuthenticationService.Client.AuthenticationService;
+using InternshipAuthenticationService.Client.UI_Forms;
 
 namespace InternshipAuthenticationService.Client.UIForms
 {
@@ -55,7 +56,7 @@ namespace InternshipAuthenticationService.Client.UIForms
             Enabled = false;
         }
 
-        private void CreateUserButtonClick(object sender, EventArgs e)
+        private async void CreateUserButtonClick(object sender, EventArgs e)
         {
             ClearErrorProvidres();
             if (!ValidateUserData())
@@ -66,7 +67,10 @@ namespace InternshipAuthenticationService.Client.UIForms
             try
             {
                 AuthenticationServiceClient client = new AuthenticationServiceClient();
-                OperationResult serviceResult = client.CreateUser(user, textBoxPassword.Text);
+                Form frm = new ProgressForm();
+                frm.Show();
+                OperationResult serviceResult = await client.CreateUserAsync(user, textBoxPassword.Text);
+                frm.Close();
                 if (CheckServiceResult(serviceResult))
                 {
                     Close();
