@@ -89,6 +89,7 @@ namespace InternshipAuthenticationService.Client.UIForms
                 frm.Close();
                 if (CheckServiceResult(serviceResult))
                 {
+                    DialogResult = DialogResult.OK;
                     Close();
                 }
             }

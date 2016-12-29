@@ -151,6 +151,7 @@ namespace InternshipAuthenticationService.Client.UIForms
                 Form frm = new ProgressForm();
                 frm.Show();
                 User[] users = await client.SearchUserAsync(textBoxLogin.Text, textBoxFullName.Text, roleName);
+
                 frm.Close();
                 dataGridViewSearch.DataSource = new BindingList<ClientUser>(users.Select(user => new ClientUser(user)).ToList());
                 if (users.Length == 0)

@@ -66,7 +66,7 @@ namespace InternshipAuthenticationService.AuthenticationService
 
         public IEnumerable<Models.ServiceModels.Role> GetAllRoles()
         {
-            return  Mapper.Map<List<Models.ServiceModels.Role>>(_roleRepository.GetAll());
+            return  Mapper.Map<List<Models.ServiceModels.Role>>(_roleRepository.GetAll()).ToList();
         }
 
         public OperationResult<Models.ServiceModels.User> AuthorizationUser(string login, string password)
@@ -219,12 +219,12 @@ namespace InternshipAuthenticationService.AuthenticationService
         {
             IEnumerable<Models.EFModels.User> users;
             users = _userRepository.Search(login, fullName, role);          
-            return Mapper.Map<IEnumerable<Models.ServiceModels.User>>(users); ;
+            return Mapper.Map<IEnumerable<Models.ServiceModels.User>>(users).ToList();
         }
 
         public IEnumerable<Models.ServiceModels.User> GetAll()
         {          
-            return Mapper.Map<List<Models.ServiceModels.User>>(_userRepository.GetAll());
+            return Mapper.Map<List<Models.ServiceModels.User>>(_userRepository.GetAll()).ToList();
         }
 
         private bool IsExists(Models.ServiceModels.User user)
