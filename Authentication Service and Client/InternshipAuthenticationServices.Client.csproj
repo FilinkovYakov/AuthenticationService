@@ -71,6 +71,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="UI Forms\OtherUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI Forms\OtherUserForm.Designer.cs">
+      <DependentUpon>OtherUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI Forms\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,18 +109,15 @@
     <Compile Include="UI Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI Forms\OtherUserForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI Forms\OtherUserForm.Designer.cs">
-      <DependentUpon>OtherUserForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI Forms\ProgressForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI Forms\ProgressForm.Designer.cs">
       <DependentUpon>ProgressForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI Forms\OtherUserForm.resx">
+      <DependentUpon>OtherUserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI Forms\ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,9 +142,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI Forms\OtherUserForm.resx">
-      <DependentUpon>OtherUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI Forms\ProgressForm.resx">
       <DependentUpon>ProgressForm.cs</DependentUpon>

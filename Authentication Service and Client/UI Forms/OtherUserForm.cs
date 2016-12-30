@@ -1,31 +1,87 @@
-﻿using InternshipAuthenticationService.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using InternshipAuthenticationService.Models.OperationResult;
 using System.Windows.Forms;
+using InternshipAuthenticationService.Client.AuthenticationService;
 using InternshipAuthenticationService.Models.ServiceModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.ServiceModel;
+using System.ComponentModel;
+using InternshipAuthenticationService.Client.UI_Forms;
 
 namespace InternshipAuthenticationService.Client.UIForms
 {
     public partial class OtherUserForm : Form
     {
-        User user;
+        private User _user = new User();
+        private User[] users = new User[5];
         public OtherUserForm(User user)
         {
             InitializeComponent();
-            this.user = user;
-            Text = "Welcome " + user.Login + ", your role is " + user.Roles.First<Role>().RoleName;
+            this._user = user;
+            this.Text = "Welcome " + user.Login + ", your role is " + user.Roles.First<Role>().RoleName;
+            dataGridViewSearch.AutoGenerateColumns = false;
+            dataGridViewSearch.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dataGridViewSearch.AllowUserToResizeRows = false;
+            LoadRoles();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void LoadRoles()
         {
-            user = null;
-            Close();
+            AuthenticationServiceClient client = new AuthenticationServiceClient();
+            Task<Role[]> rolesTask = client.GetAllRolesAsync();
+            rolesTask.ContinueWith(task =>
+            {
+                Invoke(new Action(() =>
+                {
+                    try
+                    {
+                        comboBoxRole.Items.Clear();
+                        comboBoxRole.Items.Add("All roles");
+                        foreach (string role in task.Result.Select(r => r.RoleName))
+                        {
+                            comboBoxRole.Items.Add(role);
+                        }
+                        Enabled = true;
+                    }
+                    catch (FaultException<Models.Faults.InvalidRoleFault> exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
+                    catch (FaultException exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
+                }));
+            });
+        }
+
+        private async void SearchUserButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AuthenticationServiceClient client = new AuthenticationServiceClient();
+                string roleName = comboBoxRole.Text;
+                if (roleName.ToLower().Equals("all roles"))
+                {
+                    roleName = "";
+                }
+                Form frm = new ProgressForm();
+                frm.Show();
+                User[] users = await client.SearchUserAsync(textBoxLogin.Text, textBoxFullName.Text, roleName);
+
+                frm.Close();
+                dataGridViewSearch.DataSource = new BindingList<ClientUser>(users.Select(user => new ClientUser(user)).ToList());
+                if (users.Length == 0)
+                {
+                    MessageBox.Show("Users not found!");
+                }
+            }
+            catch (FaultException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
     }
 }
