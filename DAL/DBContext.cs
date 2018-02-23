@@ -10,7 +10,7 @@ namespace InternshipAuthenticationService.DAL
     public class AuthenticationServiceDbContext : DbContext
     {
         public AuthenticationServiceDbContext()
-            : base("DbConnection")
+            : base("Mirantis.AuthenticationService")
         {
             Database.SetInitializer(new AuthenticationServiceDbInitializer());
         }
@@ -58,8 +58,8 @@ namespace InternshipAuthenticationService.DAL
                 try
                 {
                     Role adminRole = context.Roles.Add(new Role { RoleName = "Admin" });
-                    context.Roles.Add(new Role { RoleName = "Mentor" });
-                    context.Roles.Add(new Role { RoleName = "Intern" });
+                    context.Roles.Add(new Role { RoleName = "Manager" });
+                    context.Roles.Add(new Role { RoleName = "Engineer" });
 
                     context.Users.Add(new User
                     {
